@@ -7,6 +7,7 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
+import PatientView from "views/patient/PatientView";
 
 var ps;
 
