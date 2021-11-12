@@ -8,6 +8,7 @@ import CaregiverView from "views/caregiver/CaregiverView";
 
 // 공고 관리
 import AnnouncementList from "views/announcement/AnnouncementList";
+import AnnouncementView from "views/announcement/AnnouncementView";
 
 // 공지사항 관리
 import NoticeList from "views/notice/NoticeList";
@@ -26,7 +27,6 @@ var routes = [
     icon: "nc-icon nc-single-02",
     component: CaregiverList,
     layout: "/admin",
-    sidebar: true,
   },
   {
     path: ["/announcements", "/announcements/:id"],
@@ -34,7 +34,6 @@ var routes = [
     icon: "nc-icon nc-tile-56",
     component: AnnouncementList,
     layout: "/admin",
-    sidebar: true,
   },
   {
     path: ["/notices", "/notices/:id"],
@@ -42,7 +41,13 @@ var routes = [
     icon: "nc-icon nc-bell-55",
     component: NoticeList,
     layout: "/admin",
-    sidebar: true,
+  },
+  {
+    path: "/sample",
+    name: "샘플",
+    icon: "nc-icon nc-bell-55",
+    component: AnnouncementView,
+    layout: "/admin",
   },
 ];
 export default routes;
