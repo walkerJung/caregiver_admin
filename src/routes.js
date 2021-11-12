@@ -12,34 +12,63 @@ import AnnouncementView from "views/announcement/AnnouncementView";
 
 // 공지사항 관리
 import NoticeList from "views/notice/NoticeList";
+import NoticeView from "views/notice/NoticeView";
 
 var routes = [
   {
-    path: ["/patients", "/patients/:id"],
+    path: "/patients",
     name: "환자 관리",
     icon: "nc-icon nc-single-02",
     component: PatientList,
     layout: "/admin",
   },
   {
-    path: ["/caregivers", "/caregivers/:id"],
+    path: "/patients/:id",
+    name: "환자 정보",
+    icon: "nc-icon nc-single-02",
+    component: PatientView,
+    layout: "/admin",
+  },
+  {
+    path: "/caregivers",
     name: "간병인 관리",
     icon: "nc-icon nc-single-02",
     component: CaregiverList,
     layout: "/admin",
   },
   {
-    path: ["/announcements", "/announcements/:id"],
+    path: "/caregivers/:id",
+    name: "간병인 정보",
+    icon: "nc-icon nc-single-02",
+    component: CaregiverView,
+    layout: "/admin",
+  },
+  {
+    path: "/announcements",
     name: "공고 관리",
     icon: "nc-icon nc-tile-56",
     component: AnnouncementList,
     layout: "/admin",
   },
   {
-    path: ["/notices", "/notices/:id"],
+    path: "/announcements/:id",
+    name: "공고 정보",
+    icon: "nc-icon nc-tile-56",
+    component: AnnouncementView,
+    layout: "/admin",
+  },
+  {
+    path: "/notices",
     name: "공지사항 관리",
     icon: "nc-icon nc-bell-55",
     component: NoticeList,
+    layout: "/admin",
+  },
+  {
+    path: "/notices/:id",
+    name: "공지사항 정보",
+    icon: "nc-icon nc-bell-55",
+    component: NoticeView,
     layout: "/admin",
   },
   {
@@ -50,4 +79,5 @@ var routes = [
     layout: "/admin",
   },
 ];
+
 export default routes;

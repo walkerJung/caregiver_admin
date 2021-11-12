@@ -7,7 +7,7 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
-import PatientView from "views/patient/PatientView";
+import menus from "../components/Sidebar/Menu";
 
 var ps;
 
@@ -36,7 +36,7 @@ function Dashboard(props) {
     <div className="wrapper">
       <Sidebar
         {...props}
-        routes={routes}
+        routes={menus}
         bgColor={backgroundColor}
         activeColor={activeColor}
       />
@@ -46,6 +46,7 @@ function Dashboard(props) {
           {routes.map((prop, key) => {
             return (
               <Route
+                exact
                 path={prop.layout + prop.path}
                 component={prop.component}
                 key={key}

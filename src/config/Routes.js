@@ -8,7 +8,7 @@ const AppRouter = ({ isLoggedIn }) => {
   return (
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect to="/admin/patientlist" />
+      <Redirect to="/admin/patients" />
     </Switch>
   );
 };

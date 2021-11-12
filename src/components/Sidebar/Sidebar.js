@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import { Nav } from "reactstrap";
 
 import PerfectScrollbar from "perfect-scrollbar";
@@ -50,18 +51,26 @@ function Sidebar(props) {
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
-          {props.routes.map((prop, key) => {
+          {props.routes.map((item, index) => {
             return (
-              <li className={activeRoute(prop.path)} key={key}>
-                <NavLink
-                  to={prop.layout + prop.path}
-                  className="nav-link"
-                  activeClassName="active"
-                >
-                  <i className={prop.icon} />
-                  <p>{prop.name}</p>
-                </NavLink>
-              </li>
+              <Route
+                key={index}
+                path={item.path}
+                children={({ match }) => {
+                  return (
+                    <li className={activeRoute(item.path[0])} key={index}>
+                      <NavLink
+                        to={item.layout + item.path[0]}
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        <i className={item.icon} />
+                        <p>{item.name}</p>
+                      </NavLink>
+                    </li>
+                  );
+                }}
+              />
             );
           })}
         </Nav>
