@@ -71,13 +71,6 @@ var routes = [
     component: NoticeView,
     layout: "/admin",
   },
-  {
-    path: "/sample",
-    name: "샘플",
-    icon: "nc-icon nc-bell-55",
-    component: AnnouncementView,
-    layout: "/admin",
-  },
 ];
 
 export default routes;
