@@ -14,25 +14,14 @@ import NoticeList from "views/notice/NoticeList";
 
 var routes = [
   {
-    path: "/patientlist",
+    path: ["/patients", "/patients/:id"],
     name: "환자 관리",
     icon: "nc-icon nc-single-02",
     component: PatientList,
     layout: "/admin",
-    sidebar: true,
   },
   {
-    path: "/patientview",
-    name: "환자 정보",
-    icon: "nc-icon nc-single-02",
-    component: PatientView,
-    layout: "/admin",
-    sidebar: false,
-    parentPath: "/patientlist",
-    parentName: "환자 관리",
-  },
-  {
-    path: "/caregiverlist",
+    path: ["/caregivers", "/caregivers/:id"],
     name: "간병인 관리",
     icon: "nc-icon nc-single-02",
     component: CaregiverList,
@@ -40,17 +29,7 @@ var routes = [
     sidebar: true,
   },
   {
-    path: "/caregiverview",
-    name: "간병인 정보",
-    icon: "nc-icon nc-single-02",
-    component: CaregiverView,
-    layout: "/admin",
-    sidebar: false,
-    parentPath: "/caregiverlist",
-    parentName: "간병인 관리",
-  },
-  {
-    path: "/announcementlist",
+    path: ["/announcements", "/announcements/:id"],
     name: "공고 관리",
     icon: "nc-icon nc-tile-56",
     component: AnnouncementList,
@@ -58,7 +37,7 @@ var routes = [
     sidebar: true,
   },
   {
-    path: "/noticelist",
+    path: ["/notices", "/notices/:id"],
     name: "공지사항 관리",
     icon: "nc-icon nc-bell-55",
     component: NoticeList,
