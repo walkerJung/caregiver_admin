@@ -5,7 +5,7 @@ import { Nav } from "reactstrap";
 
 import PerfectScrollbar from "perfect-scrollbar";
 
-import logo from "logo.svg";
+import logo from "../../assets/img/logo.png";
 
 var ps;
 
@@ -30,22 +30,16 @@ function Sidebar(props) {
   return (
     <div
       className="sidebar"
-      data-color={props.bgColor}
+      data-color="white"
       data-active-color={props.activeColor}
     >
       <div className="logo">
-        <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-mini"
-        >
+        <a href="/" className="simple-text logo-mini">
           <div className="logo-img">
             <img src={logo} alt="react-logo" />
           </div>
         </a>
-        <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-normal"
-        >
+        <a href="/" className="simple-text logo-normal">
           간병인 협동조합
         </a>
       </div>
