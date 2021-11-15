@@ -4,6 +4,7 @@ export const USER_LIST_QUERY = gql`
   query listUser {
     listUser {
       users {
+        code
         userId
         userType
         userName

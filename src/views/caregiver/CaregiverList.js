@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Card,
   CardHeader,
@@ -9,8 +8,16 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { USER_LIST_QUERY } from "../../config/Queries";
 
 function CaregiverList() {
+  const { data, loading } = useQuery(USER_LIST_QUERY);
+  const history = useHistory();
+  const handleRowClick = (userCode) => {
+    history.push(`/admin/caregivers/${userCode}`);
+  };
   return (
     <>
       <div className="content">
@@ -31,12 +38,22 @@ function CaregiverList() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td>$36,738</td>
-                    </tr>
+                    {!loading &&
+                      data.listUser.users.map((item, index) => {
+                        if (item.userType == "간병인") {
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() => handleRowClick(item.code)}
+                            >
+                              <td>{item.userId}</td>
+                              <td>{item.userName}</td>
+                              <td>{item.phone}</td>
+                              <td>{item.sex}</td>
+                            </tr>
+                          );
+                        }
+                      })}
                   </tbody>
                 </Table>
               </CardBody>

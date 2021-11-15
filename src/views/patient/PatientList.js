@@ -8,13 +8,16 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { USER_LIST_QUERY } from "../../config/Queries";
 
 function PatientList() {
   const { data, loading } = useQuery(USER_LIST_QUERY);
-  console.log(loading);
-  console.log(data.listUser.users);
+  const history = useHistory();
+  const handleRowClick = (userCode) => {
+    history.push(`/admin/patients/${userCode}`);
+  };
   return (
     <>
       <div className="content">
@@ -35,12 +38,22 @@ function PatientList() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td>$36,738</td>
-                    </tr>
+                    {!loading &&
+                      data.listUser.users.map((item, index) => {
+                        if (item.userType == "환자") {
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() => handleRowClick(item.code)}
+                            >
+                              <td>{item.userId}</td>
+                              <td>{item.userName}</td>
+                              <td>{item.phone}</td>
+                              <td>{item.sex}</td>
+                            </tr>
+                          );
+                        }
+                      })}
                   </tbody>
                 </Table>
               </CardBody>
