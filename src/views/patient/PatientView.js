@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Button,
   Card,
@@ -12,8 +11,16 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useQuery } from "@apollo/client";
+import { USER_DETAIL_QUERY } from "../../config/Queries";
 
-function PatientView() {
+function PatientView({ match }) {
+  const code = parseInt(match.params.id);
+  const { data, loading } = useQuery(USER_DETAIL_QUERY, {
+    variables: {
+      code,
+    },
+  });
   return (
     <>
       <div className="content">
@@ -34,14 +41,9 @@ function PatientView() {
                       className="avatar border-gray"
                       src={require("assets/img/mike.jpg").default}
                     />
-                    <h5 className="title">회원이름</h5>
+                    <h5 className="title">{data?.viewProfile?.userId}</h5>
                   </a>
-                  <p className="description">@회원타입</p>
                 </div>
-                <p className="description text-center">
-                  연락처 : 010-1234-5678 <br />
-                  회원가입일 : 2021-11-09
-                </p>
               </CardBody>
             </Card>
           </Col>
@@ -53,54 +55,13 @@ function PatientView() {
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="pr-1" md="5">
+                    <Col md="12">
                       <FormGroup>
-                        <label></label>
+                        <label>회원 아이디</label>
                         <Input
-                          defaultValue="Creative Code Inc."
+                          defaultValue={data?.viewProfile?.userId}
+                          type="text"
                           disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="Email" type="email" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="6">
-                      <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="Chet"
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Faker"
-                          placeholder="Last Name"
-                          type="text"
                         />
                       </FormGroup>
                     </Col>
@@ -108,55 +69,64 @@ function PatientView() {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Address</label>
+                        <label>회원 분류</label>
                         <Input
-                          defaultValue="Melbourne, Australia"
-                          placeholder="Home Address"
+                          defaultValue={data?.viewProfile?.userType}
                           type="text"
+                          disabled
                         />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Melbourne"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Australia"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>About Me</label>
+                        <label>회원 이름</label>
                         <Input
-                          type="textarea"
-                          defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                          defaultValue={data?.viewProfile?.userName}
+                          type="text"
+                          disabled
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label>회원 성별</label>
+                        <Input
+                          defaultValue={data?.viewProfile?.sex}
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label>회원 연락처</label>
+                        <Input
+                          defaultValue={data?.viewProfile?.phone}
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label>회원 가입일</label>
+                        <Input
+                          defaultValue={data?.viewProfile?.createdAt}
+                          type="text"
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  {/* <Row>
                     <div className="update ml-auto mr-auto">
                       <Button
                         className="btn-round"
@@ -166,7 +136,7 @@ function PatientView() {
                         회원정보 수정
                       </Button>
                     </div>
-                  </Row>
+                  </Row> */}
                 </Form>
               </CardBody>
             </Card>
