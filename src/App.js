@@ -10,13 +10,19 @@ import { HelmetProvider } from "react-helmet-async";
 
 import Routes from "./config/Routes";
 
+import { ApolloProvider, useReactiveVar } from "@apollo/client";
+import { client, isLoggedInVar } from "./apollo";
+
 function App() {
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <Routes isLoggedIn={true} />
-      </BrowserRouter>
-    </HelmetProvider>
+    <ApolloProvider client={client}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Routes isLoggedIn={true} />
+        </BrowserRouter>
+      </HelmetProvider>
+    </ApolloProvider>
   );
 }
 

@@ -4,9 +4,11 @@
   "private": true,
   "homepage": "https://demos.creative-tim.com/paper-dashboard-react/#/dashboard",
   "dependencies": {
+    "@apollo/client": "^3.4.17",
     "@babel/core": "7.14.2",
     "bootstrap": "4.6.0",
     "chart.js": "3.2.1",
+    "graphql": "^15.7.2",
     "jquery": "3.6.0",
     "node-sass": "6.0.0",
     "perfect-scrollbar": "1.5.1",

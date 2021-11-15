@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Card,
   CardHeader,
@@ -9,8 +8,13 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useQuery } from "@apollo/client";
+import { USER_LIST_QUERY } from "../../config/Queries";
 
 function PatientList() {
+  const { data, loading } = useQuery(USER_LIST_QUERY);
+  console.log(loading);
+  console.log(data.listUser.users);
   return (
     <>
       <div className="content">
