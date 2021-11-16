@@ -1,8 +1,16 @@
+/* 공통 */
 .flex {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
 }
+/* 사이드바 */
+.sidebar .nav i,
+.off-canvas-sidebar .nav i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+/* view */
 .card label {
   font-size: 13px;
   color: #333;
