@@ -1,0 +1,41 @@
+.flex {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.card label {
+  font-size: 13px;
+  color: #333;
+}
+.card-user form .form-group {
+  margin-bottom: 35px;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  background-color: #f0f0f0;
+}
+.profile-list {
+  border-top: 1px solid #111;
+  margin-top: 20px;
+}
+.profile-list .list {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.profile-list .list:last-child {
+  border-bottom: 0;
+}
+.profile-list .list .tit {
+  color: #848a9d;
+  width: 110px;
+  padding: 10px 5px;
+  font-size: 14px;
+}
+.profile-list .list .txt {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 5px;
+  color: #333;
+  flex: 1 0 0;
+}

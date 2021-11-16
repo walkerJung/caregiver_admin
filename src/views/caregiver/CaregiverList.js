@@ -28,7 +28,7 @@ function CaregiverList() {
                 <CardTitle tag="h4">간병인 회원 리스트</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table responsive>
+                <Table responsive hover>
                   <thead className="text-primary">
                     <tr>
                       <th>회원 아이디</th>

@@ -7,6 +7,8 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HelmetProvider } from "react-helmet-async";
+import GlobalStyles from "components/GlobalStyles";
+import "./assets/css/admin.css";
 
 import Routes from "./config/Routes";
 
@@ -16,13 +18,16 @@ import { client, isLoggedInVar } from "./apollo";
 function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
-    <ApolloProvider client={client}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Routes isLoggedIn={true} />
-        </BrowserRouter>
-      </HelmetProvider>
-    </ApolloProvider>
+    <>
+      <GlobalStyles />
+      <ApolloProvider client={client}>
+        <HelmetProvider>
+          <BrowserRouter>
+            <Routes isLoggedIn={true} />
+          </BrowserRouter>
+        </HelmetProvider>
+      </ApolloProvider>
+    </>
   );
 }
 

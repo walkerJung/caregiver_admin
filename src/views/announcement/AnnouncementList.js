@@ -21,7 +21,7 @@ function AnnouncementList() {
                 <CardTitle tag="h4">간병인 공고 리스트</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table responsive>
+                <Table responsive hover>
                   <thead className="text-primary">
                     <tr>
                       <th>연번</th>

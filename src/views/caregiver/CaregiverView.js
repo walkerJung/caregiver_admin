@@ -45,16 +45,30 @@ function PatientView({ match }) {
                       />
                       <h5 className="title">{data?.viewProfile?.userId}</h5>
                     </a>
-                    <p className="description text-left">
-                      회원 분류 : {data?.viewProfile?.userType}
-                      <br />
-                      회원 이름 : {data?.viewProfile?.userName}
-                      <br />
-                      회원 성별 : {data?.viewProfile?.sex}
-                      <br />
-                      회원 연락처 : {data?.viewProfile?.phone} <br />
-                      회원 가입일 : {data?.viewProfile?.createdAt}
-                    </p>
+                    <div className="profile-list">
+                      <div className="list flex">
+                        <div className="tit">회원 분류</div>
+                        <div className="txt">{data?.viewProfile?.userType}</div>
+                      </div>
+                      <div className="list flex">
+                        <div className="tit">회원 이름</div>
+                        <div className="txt">{data?.viewProfile?.userName}</div>
+                      </div>
+                      <div className="list flex">
+                        <div className="tit">회원 성별</div>
+                        <div className="txt">{data?.viewProfile?.sex}</div>
+                      </div>
+                      <div className="list flex">
+                        <div className="tit">회원 연락처</div>
+                        <div className="txt">{data?.viewProfile?.phone}</div>
+                      </div>
+                      <div className="list flex">
+                        <div className="tit">회원 가입일</div>
+                        <div className="txt">
+                          {data?.viewProfile?.createdAt}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </CardBody>
               </Card>

@@ -21,7 +21,7 @@ function NoticeList() {
                 <CardTitle tag="h4">공지사항 리스트</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table responsive>
+                <Table responsive hover>
                   <thead className="text-primary">
                     <tr>
                       <th>연번</th>
