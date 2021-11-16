@@ -32,7 +32,7 @@ function PatientView({ match }) {
                 <div className="image">
                   <img
                     alt="..."
-                    src={require("assets/img/damir-bosnjak.jpg").default}
+                    src={require("assets/img/card-img.jpg").default}
                   />
                 </div>
                 <CardBody>
