@@ -12,8 +12,8 @@ import menus from "../components/Sidebar/Menu";
 var ps;
 
 function Dashboard(props) {
-  const [backgroundColor, setBackgroundColor] = React.useState("white");
-  const [activeColor, setActiveColor] = React.useState("info");
+  const [backgroundColor] = React.useState("white");
+  const [activeColor] = React.useState("info");
   const mainPanel = React.useRef();
   const location = useLocation();
   React.useEffect(() => {

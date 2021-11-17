@@ -1,4 +1,3 @@
-import { Children } from "react";
 import styled from "styled-components";
 
 export const BoldTxt = styled.span`

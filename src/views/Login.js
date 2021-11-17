@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 import "../assets/css/login.css";
 import simbol from "../assets/img/simbol.png";
-function Login() {
-  const [memberId, setMemberId] = useState("");
-  const [memberPw, setMemberPw] = useState("");
-  const handleMemberId = (e) => {
-    setMemberId(e.target.value);
-  };
+import { useMutation } from "@apollo/client";
+import { LOGIN_MUTATION } from "../config/Queries";
+import { logUserIn } from "../apollo";
+import { useForm } from "react-hook-form";
+import FormError from "../components/FormError";
+import { toast } from "react-toastify";
+import { Button } from "reactstrap";
 
-  const handleMemberPw = (e) => {
-    setMemberPw(e.target.value);
+function Login() {
+  const [logInMutation, { loading }] = useMutation(LOGIN_MUTATION);
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onChange",
+  });
+  const onSubmit = async (data) => {
+    if (loading) {
+      return;
+    }
+    const { data: LoginResult } = await logInMutation({
+      variables: {
+        userId: data.userId,
+        password: data.password,
+      },
+    });
+    const token = LoginResult.login.token;
+    const error = LoginResult.login.error;
+    console.log(token);
+    if (token) {
+      logUserIn(token);
+    } else {
+      toast.error("로그인 정보를 확인해주세요", {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
   return (
     <>
@@ -19,54 +44,51 @@ function Login() {
             <img src={simbol} alt="" className="login-simbol" />
             <h2 className="login-tit">케어코리아 관리자 로그인</h2>
           </div>
-
-          <div className="login-form-group">
-            <label htmlFor="member_id" className="control-label hidden">
-              아이디
-            </label>
-            <input
-              type="text"
-              id="member_id"
-              className="login-form-control"
-              value={memberId}
-              onChange={handleMemberId}
-              placeholder="아이디"
-            />
-          </div>
-          <div className="login-form-group">
-            <label htmlFor="member_password" className="control-label hidden">
-              비밀번호
-            </label>
-            <input
-              type="password"
-              id="member_password"
-              className="login-form-control"
-              value={memberPw}
-              onChange={handleMemberPw}
-              placeholder="비밀번호"
-            />
-          </div>
-          <div className="flex-both">
-            <div className="login-checkbox">
-              <input
-                type="checkbox"
-                name="id_remember"
-                id="id_remember"
-                value=""
-              />
-              <label
-                htmlFor="id_remember"
-                style={{ marginLeft: 5, marginBottom: 0 }}
-              >
-                아이디 저장
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="login-form-group">
+              <label htmlFor="userId" className="control-label hidden">
+                아이디
               </label>
+              <input
+                type="text"
+                name="userId"
+                className="login-form-control"
+                placeholder="아이디"
+                autoComplete="off"
+                autoFocus
+                ref={register({
+                  required: "아이디를 입력해주세요.",
+                })}
+              />
+
+              <FormError message={errors?.userId?.message} />
             </div>
-          </div>
-          <div className="btn-area">
-            <button type="button" className="btn btn-full-large btn-block">
-              로그인
-            </button>
-          </div>
+            <div className="login-form-group">
+              <label htmlFor="password" className="control-label hidden">
+                비밀번호
+              </label>
+              <input
+                type="password"
+                name="password"
+                className="login-form-control"
+                placeholder="비밀번호"
+                ref={register({
+                  required: "비밀번호를 입력해주세요.",
+                })}
+              />
+
+              <FormError message={errors?.userId?.message} />
+            </div>
+
+            <div className="flex-both">
+              <div className="login-checkbox"></div>
+            </div>
+            <div className="btn-area">
+              <Button type="submit" className="btn btn-full-large btn-block">
+                로그인
+              </Button>
+            </div>
+          </form>
         </div>
       </div>
     </>
