@@ -151,7 +151,7 @@ function AnnouncementView() {
 
         {/* ------------- 아래는 wirte 코드입니다 ------------ */}
         {/* 추가한 reactstrap 코드는 아래에 따로 적어둘게요 */}
-        {/* import {Col, Card, CardBody, Form, FormGroup, Label, Input} from "reactstrap"; */}
+        {/* import {Col, Card, CardBody, Form, FormGroup, Label, Input, InputGroupText, InputGroup,} from "reactstrap"; */}
         <Card>
           <div className="card-heading">공고 정보 작성</div>
           <CardBody>
@@ -272,14 +272,14 @@ function AnnouncementView() {
           <CardBody>
             <Form>
               <FormGroup row>
-                <Label for="guardianName" sm={2} className="control-label">
-                  보호자 성함
+                <Label for="patientName" sm={2} className="control-label">
+                  환자 성함
                 </Label>
                 <Col sm={10}>
                   <Input
-                    id="guardianName"
-                    name="guardianName"
-                    placeholder="보호자 성함을 입력해주세요."
+                    id="patientName"
+                    name="patientName"
+                    placeholder="환자 성함을 입력해주세요."
                     type="text"
                   />
                 </Col>
