@@ -6,7 +6,6 @@ import AdminLayout from "../layouts/Admin";
 import Login from "../views/Login";
 
 const AppRouter = ({ isLoggedIn }) => {
-  console.log(isLoggedIn);
   return (
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />

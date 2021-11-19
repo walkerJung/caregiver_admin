@@ -55,6 +55,14 @@ export const USER_DETAIL_QUERY = gql`
   }
 `;
 
+export const USER_DELETE_MUTATION = gql`
+  mutation deleteAccount($code: Int!) {
+    deleteAccount(code: $code) {
+      ok
+    }
+  }
+`;
+
 // 공고 관리
 export const ANNOUNCEMENT_LIST_QUERY = gql`
   query listAnnouncement {

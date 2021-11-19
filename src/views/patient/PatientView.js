@@ -11,16 +11,43 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { useQuery } from "@apollo/client";
-import { USER_DETAIL_QUERY } from "../../config/Queries";
+import { useHistory } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import {
+  USER_DETAIL_QUERY,
+  USER_DELETE_MUTATION,
+  USER_LIST_QUERY,
+} from "../../config/Queries";
 
 function PatientView({ match }) {
+  const history = useHistory();
   const code = parseInt(match.params.id);
-  const { data, loading } = useQuery(USER_DETAIL_QUERY, {
+  const { data } = useQuery(USER_DETAIL_QUERY, {
     variables: {
       code,
     },
   });
+  const updateDeleteUser = (cache, result) => {
+    const {
+      data: {
+        deleteAccount: { ok },
+      },
+    } = result;
+    if (ok) {
+      history.go(`/admin/patients`);
+    }
+  };
+  const [deleteUser] = useMutation(USER_DELETE_MUTATION, {
+    variables: {
+      code,
+    },
+    update: updateDeleteUser,
+  });
+  const onDeleteClick = () => {
+    deleteUser();
+    history.push(`/admin/patients`);
+  };
+
   return (
     <>
       <div className="content">
@@ -126,17 +153,17 @@ function PatientView({ match }) {
                       </FormGroup>
                     </Col>
                   </Row>
-                  {/* <Row>
+                  <Row>
                     <div className="update ml-auto mr-auto">
                       <Button
                         className="btn-round"
-                        color="primary"
-                        type="submit"
+                        color="danger"
+                        onClick={onDeleteClick}
                       >
-                        회원정보 수정
+                        회원정보 삭제
                       </Button>
                     </div>
-                  </Row> */}
+                  </Row>
                 </Form>
               </CardBody>
             </Card>

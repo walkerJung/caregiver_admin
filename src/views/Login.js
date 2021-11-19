@@ -26,7 +26,6 @@ function Login() {
     });
     const token = LoginResult.login.token;
     const error = LoginResult.login.error;
-    console.log(token);
     if (token) {
       logUserIn(token);
     } else {

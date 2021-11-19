@@ -239,6 +239,17 @@ function PatientView({ match }) {
                         </FormGroup>
                       </Col>
                     </Row>
+                    <Row>
+                      <div className="update ml-auto mr-auto">
+                        <Button
+                          className="btn-round"
+                          color="danger"
+                          type="submit"
+                        >
+                          회원정보 삭제
+                        </Button>
+                      </div>
+                    </Row>
                   </Form>
                 </CardBody>
               </Card>
