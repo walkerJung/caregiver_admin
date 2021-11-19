@@ -1,10 +1,78 @@
-/* 공통 */
-.flex {
-  display: -ms-flexbox;
-  display: -webkit-flex;
+.underline {
+  border-bottom: 1px solid #e2e7eb !important;
+}
+.input-group-addon {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 0 !important;
+}
+.card {
+  overflow: hidden;
+  border-radius: 4px;
+}
+.card .card-header .card-title {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  font-size: 22px;
+  font-weight: 500;
+}
+.btn {
+  margin: 0;
+}
+.btn.btn-white {
+  font-weight: normal;
+  color: #333;
+  background: #fff;
+  border-color: #e2e7eb;
+}
+.btn.btn-white:hover,
+.btn.btn-white:focus,
+.btn.btn-white:active,
+.btn.btn-white.active {
+  background: #e2e7eb !important;
+  border-color: #d8dde1 !important;
+  color: inherit !important;
+}
+.btn.btn-inverse {
+  color: #fff;
+  background: #2d353c;
+  border-color: #2d353c;
+}
+.btn.btn-inverse:hover,
+.btn.btn-inverse:focus,
+.btn.btn-inverse:active,
+.btn.btn-inverse.active {
+  background: #111 !important;
+  border-color: #111 !important;
+  color: #fff !important;
 }
 /* 사이드바 */
+.side-bar-btn-box {
+  width: 100%;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 9;
+}
+.side-bar-btn-box button,
+.side-bar-btn-box a {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+.sidebar .nav,
+.off-canvas-sidebar .nav {
+  margin-top: 0;
+}
 .sidebar .nav i,
 .off-canvas-sidebar .nav i {
   font-size: 18px;
@@ -138,4 +206,20 @@ fieldset[disabled] .form-control {
   padding: 10px 5px;
   color: #333;
   flex: 1 0 0;
+}
+.card-heading {
+  padding: 10px 15px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+}
+.searchBox .input-group-btn {
+  padding: 0;
+}
+.searchBox .input-group-btn .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.dropdown-menu {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
 }

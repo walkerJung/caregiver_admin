@@ -41,9 +41,19 @@ function Sidebar(props) {
           </div>
         </a>
         <a href="/" className="simple-text logo-normal">
-          간병인 협동조합
+          케어코리아
         </a>
       </div>
+      <div className="flex side-bar-btn-box">
+        <Button
+          onClick={() => {
+            logUserOut();
+          }}
+        >
+          로그아웃
+        </Button>
+      </div>
+
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
           {props.routes.map((item, index) => {
@@ -69,13 +79,6 @@ function Sidebar(props) {
             );
           })}
         </Nav>
-        <Button
-          onClick={() => {
-            logUserOut();
-          }}
-        >
-          로그아웃
-        </Button>
       </div>
     </div>
   );

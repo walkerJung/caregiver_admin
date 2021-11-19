@@ -8,6 +8,7 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { HelmetProvider } from "react-helmet-async";
 import GlobalStyles from "components/GlobalStyles";
+import "assets/css/common.css";
 import "./assets/css/admin.css";
 
 import Routes from "./config/Routes";
@@ -18,14 +19,18 @@ import { client, isLoggedInVar } from "./apollo";
 function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
-    <ApolloProvider client={client}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Routes isLoggedIn={isLoggedIn} />
-        </BrowserRouter>
-      </HelmetProvider>
-      <ToastContainer position={toast.POSITION.TOP_CENTER} />
-    </ApolloProvider>
+    <>
+      {/* GlobalStyles 전체 페이지 스타일 적용하는 코드입니다. */}
+      <GlobalStyles />
+      <ApolloProvider client={client}>
+        <HelmetProvider>
+          <BrowserRouter>
+            <Routes isLoggedIn={isLoggedIn} />
+          </BrowserRouter>
+        </HelmetProvider>
+        <ToastContainer position={toast.POSITION.TOP_CENTER} />
+      </ApolloProvider>
+    </>
   );
 }
 
