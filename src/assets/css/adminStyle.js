@@ -67,7 +67,7 @@ export const Panel = ({ panelHeadingTit, children }) => {
       .control-label {
         margin: 0;
         padding: 10px;
-        font-weight: 700;
+        font-weight: 500;
       }
       > div {
         padding: 10px;
