@@ -15,8 +15,16 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { ANNOUNCEMENT_LIST_QUERY } from "../../config/Queries";
 
 function AnnouncementList() {
+  const { data, loading } = useQuery(ANNOUNCEMENT_LIST_QUERY);
+  const history = useHistory();
+  const handleRowClick = (noticeCode) => {
+    history.push(`/admin/announcements/${noticeCode}`);
+  };
   const [open, SetToggle] = useState(false);
   const toggle = () => SetToggle(!open);
   return (
@@ -29,48 +37,10 @@ function AnnouncementList() {
                 <CardTitle tag="h4">간병인 공고 리스트</CardTitle>
               </CardHeader>
               <CardBody>
-                {/* 검색 */}
-                <InputGroup className="searchBox">
-                  <Input
-                    type="text"
-                    name="search"
-                    className="form-control"
-                    title="검색어 입력"
-                    placeholder="검색어(제목, 내용) 입력"
-                    value=""
-                  />
-
-                  <Button
-                    onClick={() => {}}
-                    className="btn btn-white"
-                    type="submit"
-                  >
-                    <i className="fa fa-search"></i>
-                    검색
-                  </Button>
-                </InputGroup>
-
                 {/*  */}
                 <Row className="m-b-15">
                   <Col xs="12" sm="8">
                     <InputGroup className="input-group">
-                      <label
-                        htmlFor="all_clecker"
-                        className="input-group-addon m-r-5"
-                      >
-                        <input
-                          type="checkbox"
-                          className="checkbox"
-                          id="all_clecker"
-                        />
-                      </label>
-                      <Button
-                        onClick={() => {}}
-                        className="btn btn-white m-r-5"
-                      >
-                        <i className="fas fa-trash m-r-5"></i>
-                        삭제
-                      </Button>
                       <Dropdown className="m-r-5" isOpen={open} toggle={toggle}>
                         <DropdownToggle className="btn-white" caret>
                           카테고리
@@ -88,7 +58,6 @@ function AnnouncementList() {
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
-                      <Button className="btn-inverse">확인</Button>
                     </InputGroup>
                   </Col>
                   <Col xs="12" sm="4" className="text-right">
@@ -103,17 +72,27 @@ function AnnouncementList() {
                     <tr>
                       <th>연번</th>
                       <th>공고 제목</th>
-                      <th>작성자</th>
+                      <th>공고 상태</th>
                       <th>작성일</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>원트 간병인</td>
-                      <td>정정훈</td>
-                      <td>2021-11-09</td>
-                    </tr>
+                    {!loading &&
+                      data?.listAnnouncement?.announcements?.map(
+                        (item, index) => {
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() => handleRowClick(item.code)}
+                            >
+                              <td>{index + 1}</td>
+                              <td>{item.title}</td>
+                              <td>{item.status}</td>
+                              <td>{item.createdAt}</td>
+                            </tr>
+                          );
+                        }
+                      )}
                   </tbody>
                 </Table>
               </CardBody>

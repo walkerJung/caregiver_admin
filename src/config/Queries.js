@@ -104,7 +104,7 @@ export const NOTICE_LIST_QUERY = gql`
 `;
 
 export const NOTICE_DETAIL_QUERY = gql`
-  query viewProfile($code: Int!) {
+  query viewNotice($code: Int!) {
     viewNotice(code: $code) {
       code
       title
