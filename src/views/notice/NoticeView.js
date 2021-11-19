@@ -7,6 +7,14 @@ import {
   Table,
   Row,
   Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  InputGroup,
+  Input,
+  ButtonGroup,
+  Button,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -15,34 +23,29 @@ import { NOTICE_LIST_QUERY } from "../../config/Queries";
 function NoticeView() {
   return (
     <div className="content">
-      <div className="row m-b-15">
-        <div className="col-xs-6 col-sm-6 text-left">
-          <button onClick={() => {}} className="btn btn-white" role="button">
+      <Row className="m-b-15">
+        <Col xs="6" sm="6" className="text-left">
+          <Button onClick={() => {}} className="btn-white">
             <i className="fa fa-list"></i>
-            <span> 목록</span>
-          </button>
-        </div>
-        <div className="col-xs-6 col-sm-6 text-right">
-          <div className="btn-group">
-            <button
-              onClick={() => {}}
-              className="btn btn-white text-success"
-              role="button"
-            >
+            목록
+          </Button>
+        </Col>
+        <Col xs="6" sm="6" className="text-right">
+          <ButtonGroup className="btn-group">
+            <Button onClick={() => {}} className="btn-white text-success">
               <i className="fas fa-edit"></i>
-              <span> 수정</span>
-            </button>
-            <button
+              수정
+            </Button>
+            <Button
               onClick={() => {}}
               className="btn btn-white text-danger delete"
-              role="button"
             >
               <i className="fas fa-trash"></i>
-              <span> 삭제</span>
-            </button>
-          </div>
-        </div>
-      </div>
+              삭제
+            </Button>
+          </ButtonGroup>
+        </Col>
+      </Row>
       <Card>
         <div className="card-heading">해당 공지사항 제목이 들어옵니다.</div>
         <CardBody>
@@ -53,34 +56,29 @@ function NoticeView() {
           <div className="article-editor">여기에 본문이 들어옵니다</div>
         </CardBody>
       </Card>
-      <div className="row">
-        <div className="col-xs-6 col-sm-6 text-left">
-          <button onClick={() => {}} className="btn btn-white" role="button">
+      <Row>
+        <Col xs="6" sm="6" className="text-left">
+          <Button onClick={() => {}} className="btn-white">
             <i className="fa fa-list"></i>
-            <span> 목록</span>
-          </button>
-        </div>
-        <div className="col-xs-6 col-sm-6 text-right">
-          <div className="btn-group">
-            <button
-              onClick={() => {}}
-              className="btn btn-white text-success"
-              role="button"
-            >
+            목록
+          </Button>
+        </Col>
+        <Col xs="6" sm="6" className="text-right">
+          <ButtonGroup className="btn-group">
+            <Button onClick={() => {}} className="btn-white text-success">
               <i className="fas fa-edit"></i>
-              <span> 수정</span>
-            </button>
-            <button
+              수정
+            </Button>
+            <Button
               onClick={() => {}}
               className="btn btn-white text-danger delete"
-              role="button"
             >
               <i className="fas fa-trash"></i>
-              <span> 삭제</span>
-            </button>
-          </div>
-        </div>
-      </div>
+              삭제
+            </Button>
+          </ButtonGroup>
+        </Col>
+      </Row>
     </div>
   );
 }

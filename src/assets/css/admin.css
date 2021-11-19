@@ -29,6 +29,9 @@
 .btn {
   margin: 0;
 }
+.btn > i {
+  margin-right: 5px;
+}
 .btn.btn-white {
   font-weight: normal;
   color: #333;
