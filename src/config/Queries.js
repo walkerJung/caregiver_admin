@@ -11,7 +11,7 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
-// 유저
+// 유저 관리
 export const USER_LIST_QUERY = gql`
   query listUser {
     listUser {
@@ -55,7 +55,41 @@ export const USER_DETAIL_QUERY = gql`
   }
 `;
 
-// 공지사항
+// 공고 관리
+export const ANNOUNCEMENT_LIST_QUERY = gql`
+  query listAnnouncement {
+    listAnnouncement {
+      announcements {
+        status
+        userCode
+        needMealCare
+        needUrineCare
+        needSuctionCare
+        needMoveCare
+        needBedCare
+        needHygieneCare
+        caregiverMeal
+        infectiousDisease
+        title
+        startDate
+        endDate
+        protectorName
+        protectorPhone
+        patientName
+        patientAge
+        patientWeight
+        address
+        addressDetail
+        nursingGrade
+        disease
+        isolation
+        createdAt
+      }
+    }
+  }
+`;
+
+// 공지사항 관리
 export const NOTICE_LIST_QUERY = gql`
   query listNotice {
     listNotice {
