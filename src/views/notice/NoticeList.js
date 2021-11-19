@@ -11,6 +11,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  InputGroup,
+  Input,
+  Button,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -39,8 +42,8 @@ function NoticeList() {
 
               <CardBody>
                 {/* 검색 */}
-                <div className="input-group searchBox">
-                  <input
+                <InputGroup className="searchBox">
+                  <Input
                     type="text"
                     name="search"
                     className="form-control"
@@ -49,22 +52,20 @@ function NoticeList() {
                     value=""
                   />
 
-                  <span className="input-group-btn">
-                    <button
-                      onClick={() => {}}
-                      className="btn btn-white"
-                      type="submit"
-                    >
-                      <i className="fa fa-search"></i>
-                      <span className="hidden-xs hidden-sm"> 검색</span>
-                    </button>
-                  </span>
-                </div>
+                  <Button
+                    onClick={() => {}}
+                    className="btn btn-white"
+                    type="submit"
+                  >
+                    <i className="fa fa-search"></i>
+                    검색
+                  </Button>
+                </InputGroup>
 
                 {/*  */}
-                <div className="row m-b-15">
-                  <div className="col-xs-12 col-sm-8">
-                    <div className="input-group">
+                <Row className="m-b-15">
+                  <Col xs="12" sm="8">
+                    <InputGroup className="input-group">
                       <label
                         htmlFor="all_clecker"
                         className="input-group-addon m-r-5"
@@ -75,13 +76,13 @@ function NoticeList() {
                           id="all_clecker"
                         />
                       </label>
-                      <button
+                      <Button
                         onClick={() => {}}
                         className="btn btn-white m-r-5"
                       >
                         <i className="fas fa-trash m-r-5"></i>
-                        <span className="hidden-xs hidden-sm">삭제</span>
-                      </button>
+                        삭제
+                      </Button>
                       <Dropdown className="m-r-5" isOpen={open} toggle={toggle}>
                         <DropdownToggle className="btn-white" caret>
                           카테고리
@@ -99,22 +100,16 @@ function NoticeList() {
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
-                      <button className="btn btn-inverse">
-                        <span>확인</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-4 text-right">
-                    <button
-                      onClick={() => {}}
-                      className="btn btn-sm btn-inverse"
-                      role="button"
-                    >
+                      <Button className="btn-inverse">확인</Button>
+                    </InputGroup>
+                  </Col>
+                  <Col xs="12" sm="4" className="text-right">
+                    <Button onClick={() => {}} className="btn-inverse">
                       <i className="fas fa-pen m-r-5"></i>
                       <span className="">글 작성</span>
-                    </button>
-                  </div>
-                </div>
+                    </Button>
+                  </Col>
+                </Row>
                 <Table responsive hover>
                   <thead className="text-primary">
                     <tr>
