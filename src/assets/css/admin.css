@@ -42,12 +42,12 @@
 .btn.btn-white:focus,
 .btn.btn-white:active,
 .btn.btn-white.active {
+  color: inherit !important;
   background: #e2e7eb !important;
   border-color: #d8dde1 !important;
-  color: inherit !important;
 }
 .btn.btn-inverse {
-  color: #fff;
+  color: #fff !important;
   background: #2d353c;
   border-color: #2d353c;
 }

@@ -509,9 +509,9 @@
 .show > .navbar .navbar-nav > a.btn.dropdown-toggle,
 .show > .navbar .navbar-nav > a.btn.dropdown-toggle:focus,
 .show > .navbar .navbar-nav > a.btn.dropdown-toggle:hover {
-  background-color: #fff !important;
+  /* background-color: #fff !important;
   color: #111 !important;
-  box-shadow: inherit !important;
+  box-shadow: inherit !important; */
 }
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus {
