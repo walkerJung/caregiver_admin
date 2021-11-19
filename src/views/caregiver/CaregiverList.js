@@ -39,7 +39,7 @@ function CaregiverList() {
                   </thead>
                   <tbody>
                     {!loading &&
-                      data.listUser.users.map((item, index) => {
+                      data?.listUser?.users?.map((item, index) => {
                         if (item.userType == "간병인") {
                           return (
                             <tr

@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// 로그인
 export const LOGIN_MUTATION = gql`
   mutation login($userId: String!, $password: String!) {
     login(userId: $userId, password: $password) {
@@ -10,6 +11,7 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
+// 유저
 export const USER_LIST_QUERY = gql`
   query listUser {
     listUser {
@@ -49,6 +51,31 @@ export const USER_DETAIL_QUERY = gql`
         moveCare
         bedCare
       }
+    }
+  }
+`;
+
+// 공지사항
+export const NOTICE_LIST_QUERY = gql`
+  query listNotice {
+    listNotice {
+      notices {
+        code
+        title
+        content
+        createdAt
+      }
+    }
+  }
+`;
+
+export const NOTICE_DETAIL_QUERY = gql`
+  query viewProfile($code: Int!) {
+    viewNotice(code: $code) {
+      code
+      title
+      content
+      createdAt
     }
   }
 `;

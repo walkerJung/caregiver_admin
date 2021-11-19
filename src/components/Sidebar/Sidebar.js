@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Route } from "react-router-dom";
-import { Nav } from "reactstrap";
+import { Button, Nav } from "reactstrap";
 
 import PerfectScrollbar from "perfect-scrollbar";
 
 import logo from "../../assets/img/logo.png";
+import { logUserOut } from "apollo";
 
 var ps;
 
@@ -68,6 +69,13 @@ function Sidebar(props) {
             );
           })}
         </Nav>
+        <Button
+          onClick={() => {
+            logUserOut();
+          }}
+        >
+          로그아웃
+        </Button>
       </div>
     </div>
   );
