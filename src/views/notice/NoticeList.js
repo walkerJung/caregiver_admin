@@ -7,6 +7,12 @@ import {
   Table,
   Row,
   Col,
+  InputGroup,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
@@ -33,6 +39,14 @@ function NoticeList() {
               </CardHeader>
 
               <CardBody>
+                <Row className="m-b-15">
+                  <Col xs="12" sm="12" className="text-right">
+                    <Button onClick={() => {}} className="btn-inverse">
+                      <i className="fas fa-pen m-r-5"></i>
+                      <span className="">글 작성</span>
+                    </Button>
+                  </Col>
+                </Row>
                 <Table responsive hover>
                   <thead className="text-primary">
                     <tr>

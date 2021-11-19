@@ -29,7 +29,7 @@ function AnnouncementWrite() {
                 </Label>
                 <Col sm={10}>
                   <Input
-                    id=""
+                    id="announcement_title"
                     name="announcement_title"
                     placeholder="제목 공고를 입력해주세요."
                     type="text"
