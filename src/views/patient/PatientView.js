@@ -15,7 +15,12 @@ import ReactMoment from "react-moment";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { USER_DETAIL_QUERY, USER_DELETE_MUTATION } from "../../config/Queries";
+import {
+  USER_LIST_QUERY,
+  USER_DETAIL_QUERY,
+  USER_DELETE_MUTATION,
+} from "../../config/Queries";
+import { toast } from "react-toastify";
 
 function PatientView({ match }) {
   const [showAlert, setShowAlert] = useState(false);
@@ -26,24 +31,22 @@ function PatientView({ match }) {
       code,
     },
   });
-  const updateDeleteUser = (cache, result) => {
-    const {
-      data: {
-        deleteAccount: { ok },
-      },
-    } = result;
-    if (ok) {
-      history.go(`/admin/patients`);
-    }
-  };
   const [deleteUser] = useMutation(USER_DELETE_MUTATION, {
     variables: {
       code,
     },
-    update: updateDeleteUser,
+    refetchQueries: () => [
+      {
+        query: USER_LIST_QUERY,
+      },
+    ],
   });
   const onDeleteClick = () => {
     deleteUser();
+    toast.success("환자 회원 삭제가 완료되었습니다.", {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_RIGHT,
+    });
     history.push(`/admin/patients`);
   };
   return (

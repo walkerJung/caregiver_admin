@@ -18,7 +18,7 @@ var menus = [
     layout: "/admin",
   },
   {
-    path: ["/notices", "/notices/:id"],
+    path: ["/notices", "/noticewrite", "/notices/:id"],
     name: "공지사항 관리",
     icon: "nc-icon nc-bell-55",
     layout: "/admin",

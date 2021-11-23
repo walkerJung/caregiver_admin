@@ -36,25 +36,22 @@ function AnnouncementView({ match }) {
       code,
     },
   });
-  const [expectedCostWriteMutation, { mutationLoading }] = useMutation(
-    EXPECTEDCOST_WRITE_QUERY,
-    {
-      refetchQueries: () => [
-        {
-          query: ANNOUNCEMENT_LIST_QUERY,
-          variables: {
-            status: 0,
-          },
+  const [expectedCostWriteMutation] = useMutation(EXPECTEDCOST_WRITE_QUERY, {
+    refetchQueries: () => [
+      {
+        query: ANNOUNCEMENT_LIST_QUERY,
+        variables: {
+          status: 0,
         },
-        {
-          query: ANNOUNCEMENT_DETAIL_QUERY,
-          variables: {
-            code,
-          },
+      },
+      {
+        query: ANNOUNCEMENT_DETAIL_QUERY,
+        variables: {
+          code,
         },
-      ],
-    }
-  );
+      },
+    ],
+  });
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = async (data) => {
     try {

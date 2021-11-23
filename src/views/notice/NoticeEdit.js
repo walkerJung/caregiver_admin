@@ -13,12 +13,17 @@ import {
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { NOTICE_LIST_QUERY, NOTICE_WRITE_MUTATION } from "../../config/Queries";
+import {
+  NOTICE_LIST_QUERY,
+  NOTICE_DETAIL_QUERY,
+  NOTICE_EDIT_MUTATION,
+} from "../../config/Queries";
 import { toast } from "react-toastify";
 
-function NoticeWrite() {
+function NoticeEdit({ match }) {
+  const code = parseInt(match.params.id);
   const history = useHistory();
-  const [noticeWriteMutation] = useMutation(NOTICE_WRITE_MUTATION, {
+  const [noticeEditMutation] = useMutation(NOTICE_EDIT_MUTATION, {
     refetchQueries: () => [
       {
         query: NOTICE_LIST_QUERY,
@@ -28,15 +33,14 @@ function NoticeWrite() {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
-      const {
-        data: { result },
-      } = await noticeWriteMutation({
+      await noticeEditMutation({
         variables: {
+          code,
           title: data.title,
           content: data.content,
         },
       });
-      toast.success("공지사항 등록이 완료되었습니다.", {
+      toast.success("공지사항 수정이 완료되었습니다.", {
         autoClose: 3000,
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -109,4 +113,4 @@ function NoticeWrite() {
   );
 }
 
-export default NoticeWrite;
+export default NoticeEdit;

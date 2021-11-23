@@ -13,6 +13,8 @@ import AnnouncementView from "views/announcement/AnnouncementView";
 // 공지사항 관리
 import NoticeList from "views/notice/NoticeList";
 import NoticeView from "views/notice/NoticeView";
+import NoticeWrite from "views/notice/NoticeWrite";
+import NoticeEdit from "views/notice/NoticeEdit";
 
 var routes = [
   {
@@ -69,6 +71,20 @@ var routes = [
     name: "공지사항 정보",
     icon: "nc-icon nc-bell-55",
     component: NoticeView,
+    layout: "/admin",
+  },
+  {
+    path: "/notices/:id/edit",
+    name: "공지사항 수정",
+    icon: "nc-icon nc-bell-55",
+    component: NoticeEdit,
+    layout: "/admin",
+  },
+  {
+    path: "/noticewrite",
+    name: "공지사항 작성",
+    icon: "nc-icon nc-bell-55",
+    component: NoticeWrite,
     layout: "/admin",
   },
 ];

@@ -7,13 +7,9 @@ import {
   Table,
   Row,
   Col,
-  InputGroup,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Button,
 } from "reactstrap";
+import ReactMoment from "react-moment";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { NOTICE_LIST_QUERY } from "../../config/Queries";
@@ -41,7 +37,12 @@ function NoticeList() {
               <CardBody>
                 <Row className="m-b-15">
                   <Col xs="12" sm="12" className="text-right">
-                    <Button onClick={() => {}} className="btn-inverse">
+                    <Button
+                      onClick={() => {
+                        history.push("/admin/noticewrite");
+                      }}
+                      className="btn-inverse"
+                    >
                       <i className="fas fa-pen m-r-5"></i>
                       <span className="">글 작성</span>
                     </Button>
@@ -59,31 +60,28 @@ function NoticeList() {
                   </thead>
                   <tbody>
                     {!loading &&
-                      data?.listNotice?.notices?.map((item, index) => {
-                        return (
-                          <tr
-                            key={index}
-                            onClick={() => handleRowClick(item.code)}
-                          >
-                            {/* <td style="text-aline:center; vertical-align:middle;">
-                              <label htmlFor="">
-                                <input
-                                  type="checkbox"
-                                  className="card-checkbox code"
-                                  name=""
-                                  id=""
-                                  value=""
-                                />
-                              </label>
-                            </td> */}
-
-                            <td>{index + 1}</td>
-                            <td>{item.title}</td>
-                            <td>관리자</td>
-                            <td>{item.createdAt}</td>
-                          </tr>
-                        );
-                      })}
+                      data?.listNotice?.notices
+                        ?.slice(0)
+                        .reverse()
+                        .map((item, index) => {
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() => handleRowClick(item.code)}
+                            >
+                              <td>
+                                {data?.listNotice?.notices.length - index}
+                              </td>
+                              <td>{item.title}</td>
+                              <td>관리자</td>
+                              <td>
+                                <ReactMoment format="YYYY-MM-DD">
+                                  {parseInt(item.createdAt)}
+                                </ReactMoment>
+                              </td>
+                            </tr>
+                          );
+                        })}
                   </tbody>
                 </Table>
               </CardBody>

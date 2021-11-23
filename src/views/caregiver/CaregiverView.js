@@ -16,7 +16,12 @@ import ReactMoment from "react-moment";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { USER_DETAIL_QUERY, USER_DELETE_MUTATION } from "../../config/Queries";
+import {
+  USER_LIST_QUERY,
+  USER_DETAIL_QUERY,
+  USER_DELETE_MUTATION,
+} from "../../config/Queries";
+import { toast } from "react-toastify";
 
 function CaregiverView({ match }) {
   const [showAlert, setShowAlert] = useState(false);
@@ -27,24 +32,22 @@ function CaregiverView({ match }) {
       code,
     },
   });
-  const updateDeleteUser = (cache, result) => {
-    const {
-      data: {
-        deleteAccount: { ok },
-      },
-    } = result;
-    if (ok) {
-      history.go(`/admin/caregivers`);
-    }
-  };
   const [deleteUser] = useMutation(USER_DELETE_MUTATION, {
     variables: {
       code,
     },
-    update: updateDeleteUser,
+    refetchQueries: () => [
+      {
+        query: USER_LIST_QUERY,
+      },
+    ],
   });
   const onDeleteClick = () => {
     deleteUser();
+    toast.success("간병인 회원 삭제가 완료되었습니다.", {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_RIGHT,
+    });
     history.push(`/admin/caregivers`);
   };
   return (

@@ -191,3 +191,27 @@ export const NOTICE_DETAIL_QUERY = gql`
     }
   }
 `;
+
+export const NOTICE_DELETE_MUTATION = gql`
+  mutation deleteNotice($code: Int!) {
+    deleteNotice(code: $code) {
+      ok
+    }
+  }
+`;
+
+export const NOTICE_WRITE_MUTATION = gql`
+  mutation writeNotice($title: String!, $content: String!) {
+    writeNotice(title: $title, content: $content) {
+      ok
+    }
+  }
+`;
+
+export const NOTICE_EDIT_MUTATION = gql`
+  mutation editNotice($code: Int!, $title: String!, $content: String!) {
+    editNotice(code: $code, title: $title, content: $content) {
+      ok
+    }
+  }
+`;
