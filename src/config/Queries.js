@@ -65,9 +65,10 @@ export const USER_DELETE_MUTATION = gql`
 
 // 공고 관리
 export const ANNOUNCEMENT_LIST_QUERY = gql`
-  query listAnnouncement {
-    listAnnouncement {
+  query listAnnouncement($status: Int) {
+    listAnnouncement(status: $status) {
       announcements {
+        code
         status
         userCode
         needMealCare
@@ -93,6 +94,75 @@ export const ANNOUNCEMENT_LIST_QUERY = gql`
         isolation
         createdAt
       }
+    }
+  }
+`;
+
+export const ANNOUNCEMENT_DETAIL_QUERY = gql`
+  query viewAnnouncement($code: Int!) {
+    viewAnnouncement(code: $code) {
+      code
+      status
+      userCode
+      needMealCare
+      needUrineCare
+      needSuctionCare
+      needMoveCare
+      needBedCare
+      needHygieneCare
+      caregiverMeal
+      infectiousDisease
+      title
+      startDate
+      endDate
+      expectedCost
+      hopeCost
+      protectorName
+      protectorPhone
+      patientName
+      patientAge
+      patientWeight
+      address
+      addressDetail
+      nursingGrade
+      disease
+      isolation
+      createdAt
+      user {
+        userId
+        userName
+        sex
+        phone
+      }
+      announcementApplication {
+        userCode
+        caregiverCost
+        confirm
+        user {
+          userId
+          userName
+          sex
+          phone
+        }
+      }
+    }
+  }
+`;
+
+export const EXPECTEDCOST_WRITE_QUERY = gql`
+  mutation writeExpectedCost($code: Int!, $expectedCost: Int!) {
+    writeExpectedCost(code: $code, expectedCost: $expectedCost) {
+      ok
+      error
+    }
+  }
+`;
+
+export const COMPLETE_ANNOUNCEMENT_MUTATION = gql`
+  mutation completeAnnouncement($code: Int!) {
+    completeAnnouncement(code: $code) {
+      ok
+      error
     }
   }
 `;

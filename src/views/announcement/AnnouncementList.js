@@ -15,15 +15,21 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import ReactMoment from "react-moment";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { ANNOUNCEMENT_LIST_QUERY } from "../../config/Queries";
 
 function AnnouncementList() {
-  const { data, loading } = useQuery(ANNOUNCEMENT_LIST_QUERY);
+  const [status, setStatus] = useState(0);
+  const { data, loading } = useQuery(ANNOUNCEMENT_LIST_QUERY, {
+    variables: {
+      status: status ? status : 0,
+    },
+  });
   const history = useHistory();
-  const handleRowClick = (noticeCode) => {
-    history.push(`/admin/announcements/${noticeCode}`);
+  const handleRowClick = (announcementCode) => {
+    history.push(`/admin/announcements/${announcementCode}`);
   };
   const [open, SetToggle] = useState(false);
   const toggle = () => SetToggle(!open);
@@ -43,28 +49,48 @@ function AnnouncementList() {
                     <InputGroup className="input-group">
                       <Dropdown className="m-r-5" isOpen={open} toggle={toggle}>
                         <DropdownToggle className="btn-white" caret>
-                          카테고리
+                          공고 상태 검색
                         </DropdownToggle>
                         <DropdownMenu container="body">
-                          <DropdownItem header>카테고리</DropdownItem>
-                          <DropdownItem onClick={function noRefCheck() {}}>
-                            옵션 1
+                          <DropdownItem header>공고 상태</DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setStatus(1);
+                            }}
+                          >
+                            예상간병비 산출중
                           </DropdownItem>
-                          <DropdownItem onClick={function noRefCheck() {}}>
-                            옵션 2
+                          <DropdownItem
+                            onClick={() => {
+                              setStatus(2);
+                            }}
+                          >
+                            예상간병비 산출완료
                           </DropdownItem>
-                          <DropdownItem onClick={function noRefCheck() {}}>
-                            옵션 3
+                          <DropdownItem
+                            onClick={() => {
+                              setStatus(3);
+                            }}
+                          >
+                            환자 희망간병비 입력완료
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setStatus(4);
+                            }}
+                          >
+                            간병인 선택완료 및 입금대기
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setStatus(5);
+                            }}
+                          >
+                            입금완료
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
                     </InputGroup>
-                  </Col>
-                  <Col xs="12" sm="4" className="text-right">
-                    <Button onClick={() => {}} className="btn-inverse">
-                      <i className="fas fa-pen m-r-5"></i>
-                      <span className="">글 작성</span>
-                    </Button>
                   </Col>
                 </Row>
                 <Table responsive hover>
@@ -78,21 +104,37 @@ function AnnouncementList() {
                   </thead>
                   <tbody>
                     {!loading &&
-                      data?.listAnnouncement?.announcements?.map(
-                        (item, index) => {
+                      data?.listAnnouncement?.announcements
+                        ?.slice(0)
+                        .reverse()
+                        .map((item, index) => {
                           return (
                             <tr
                               key={index}
                               onClick={() => handleRowClick(item.code)}
                             >
-                              <td>{index + 1}</td>
+                              <td>
+                                {data?.listAnnouncement?.announcements.length -
+                                  index}
+                              </td>
                               <td>{item.title}</td>
-                              <td>{item.status}</td>
-                              <td>{item.createdAt}</td>
+                              {item.status == 1 && <td>예상간병비 산출중</td>}
+                              {item.status == 2 && <td>예상간병비 산출완료</td>}
+                              {item.status == 3 && (
+                                <td>환자 희망간병비 입력완료</td>
+                              )}
+                              {item.status == 4 && (
+                                <td>간병인 선택완료 및 입금대기</td>
+                              )}
+                              {item.status == 5 && <td>입금완료</td>}
+                              <td>
+                                <ReactMoment format="YYYY.MM.DD">
+                                  {parseInt(item.createdAt)}
+                                </ReactMoment>
+                              </td>
                             </tr>
                           );
-                        }
-                      )}
+                        })}
                   </tbody>
                 </Table>
               </CardBody>

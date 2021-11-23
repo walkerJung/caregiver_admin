@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Button,
@@ -12,16 +12,41 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { useQuery } from "@apollo/client";
-import { USER_DETAIL_QUERY } from "../../config/Queries";
+import ReactMoment from "react-moment";
+import Alert from "react-bootstrap/Alert";
+import { useHistory } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
+import { USER_DETAIL_QUERY, USER_DELETE_MUTATION } from "../../config/Queries";
 
-function PatientView({ match }) {
+function CaregiverView({ match }) {
+  const [showAlert, setShowAlert] = useState(false);
+  const history = useHistory();
   const code = parseInt(match.params.id);
   const { data, loading } = useQuery(USER_DETAIL_QUERY, {
     variables: {
       code,
     },
   });
+  const updateDeleteUser = (cache, result) => {
+    const {
+      data: {
+        deleteAccount: { ok },
+      },
+    } = result;
+    if (ok) {
+      history.go(`/admin/caregivers`);
+    }
+  };
+  const [deleteUser] = useMutation(USER_DELETE_MUTATION, {
+    variables: {
+      code,
+    },
+    update: updateDeleteUser,
+  });
+  const onDeleteClick = () => {
+    deleteUser();
+    history.push(`/admin/caregivers`);
+  };
   return (
     <>
       {!loading && (
@@ -41,7 +66,9 @@ function PatientView({ match }) {
                       <img
                         alt="..."
                         className="avatar border-gray"
-                        src={require("assets/img/mike.jpg").default}
+                        src={
+                          require("assets/img/patient_caregiver.jpeg").default
+                        }
                       />
                       <h5 className="title">{data?.viewProfile?.userId}</h5>
                     </a>
@@ -65,7 +92,9 @@ function PatientView({ match }) {
                       <div className="list flex">
                         <div className="tit">회원 가입일</div>
                         <div className="txt">
-                          {data?.viewProfile?.createdAt}
+                          <ReactMoment format="YYYY-MM-DD">
+                            {parseInt(data?.viewProfile?.createdAt)}
+                          </ReactMoment>
                         </div>
                       </div>
                     </div>
@@ -86,9 +115,12 @@ function PatientView({ match }) {
                           <label>거주주소</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.address +
-                              " " +
-                              data?.viewProfile?.CaregiverInfo[0]?.addressDetail
+                              data?.viewProfile?.CaregiverInfo[0]?.address
+                                ? data?.viewProfile?.CaregiverInfo[0]?.address +
+                                  " " +
+                                  data?.viewProfile?.CaregiverInfo[0]
+                                    ?.addressDetail
+                                : "미입력 상태"
                             }
                             type="text"
                             disabled
@@ -104,6 +136,9 @@ function PatientView({ match }) {
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]
                                 ?.residentNumber
+                                ? data?.viewProfile?.CaregiverInfo[0]
+                                    ?.residentNumber
+                                : "미입력 상태"
                             }
                             type="text"
                             disabled
@@ -118,6 +153,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.smoke
+                                ? data?.viewProfile?.CaregiverInfo[0]?.smoke
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Company"
@@ -131,6 +168,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.drink
+                                ? data?.viewProfile?.CaregiverInfo[0]?.drink
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Username"
@@ -146,6 +185,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.mealCare
+                                ? data?.viewProfile?.CaregiverInfo[0]?.mealCare
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Company"
@@ -159,6 +200,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.urineCare
+                                ? data?.viewProfile?.CaregiverInfo[0]?.urineCare
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Username"
@@ -174,6 +217,9 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.suctionCare
+                                ? data?.viewProfile?.CaregiverInfo[0]
+                                    ?.suctionCare
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Company"
@@ -187,6 +233,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.moveCare
+                                ? data?.viewProfile?.CaregiverInfo[0]?.moveCare
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Username"
@@ -203,6 +251,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.bedCare
+                                ? data?.viewProfile?.CaregiverInfo[0]?.bedCare
+                                : "미입력 상태"
                             }
                             disabled
                             placeholder="Company"
@@ -218,6 +268,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.idCard
+                                ? data?.viewProfile?.CaregiverInfo[0]?.idCard
+                                : "미입력 상태"
                             }
                             type="text"
                             disabled
@@ -232,6 +284,8 @@ function PatientView({ match }) {
                           <Input
                             defaultValue={
                               data?.viewProfile?.CaregiverInfo[0]?.bankInfo
+                                ? data?.viewProfile?.CaregiverInfo[0]?.bankInfo
+                                : "미입력 상태"
                             }
                             type="text"
                             disabled
@@ -244,13 +298,42 @@ function PatientView({ match }) {
                         <Button
                           className="btn-round"
                           color="danger"
-                          type="submit"
+                          // onClick={onDeleteClick}
+                          onClick={() => {
+                            setShowAlert(true);
+                          }}
                         >
                           회원정보 삭제
                         </Button>
                       </div>
                     </Row>
                   </Form>
+                  {showAlert && (
+                    <Alert variant="danger">
+                      <Alert.Heading>
+                        회원정보를 삭제하시겠습니까?
+                      </Alert.Heading>
+                      <p>
+                        삭제된 회원정보는 복구가 불가능합니다. 확인 후 삭제를
+                        진행해주세요!
+                      </p>
+                      <hr />
+                      <div className="d-flex justify-content-end">
+                        <Button
+                          onClick={onDeleteClick}
+                          variant="outline-success"
+                        >
+                          삭제
+                        </Button>
+                        <Button
+                          onClick={() => setShowAlert(false)}
+                          variant="outline-success"
+                        >
+                          취소
+                        </Button>
+                      </div>
+                    </Alert>
+                  )}
                 </CardBody>
               </Card>
             </Col>
@@ -261,4 +344,4 @@ function PatientView({ match }) {
   );
 }
 
-export default PatientView;
+export default CaregiverView;
