@@ -20,9 +20,12 @@ import {
   EXPECTEDCOST_WRITE_QUERY,
   ANNOUNCEMENT_LIST_QUERY,
   COMPLETE_ANNOUNCEMENT_MUTATION,
+  DELETE_ANNOUNCEMENT_MUTATION,
 } from "../../config/Queries";
+import { toast } from "react-toastify";
 
 function AnnouncementView({ match }) {
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const toggle = () => setIsModal(!isModal);
@@ -42,6 +45,8 @@ function AnnouncementView({ match }) {
         query: ANNOUNCEMENT_LIST_QUERY,
         variables: {
           status: 0,
+          skip: 0,
+          take: 10,
         },
       },
       {
@@ -91,9 +96,30 @@ function AnnouncementView({ match }) {
       },
     ],
   });
-
   const announcementComplete = () => {
     completeAnnouncement();
+  };
+  const [deleteAnnouncement] = useMutation(DELETE_ANNOUNCEMENT_MUTATION, {
+    variables: {
+      userCode: 1,
+      announcementCode: code,
+    },
+    refetchQueries: () => [
+      {
+        query: ANNOUNCEMENT_LIST_QUERY,
+        variables: {
+          status: 0,
+        },
+      },
+    ],
+  });
+  const onDeleteClick = () => {
+    deleteAnnouncement();
+    toast.success("공고 삭제가 완료되었습니다.", {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    history.push(`/admin/announcements`);
   };
 
   return (
@@ -124,7 +150,9 @@ function AnnouncementView({ match }) {
             </div>
 
             <div className="form-group row">
-              <label className="col-sm-3 control-label">예상간병비</label>
+              <label className="col-sm-3 control-label">
+                관리자 예상간병비
+              </label>
               <div className="col-sm-9">
                 {data?.viewAnnouncement?.expectedCost
                   ? data?.viewAnnouncement?.expectedCost
@@ -141,22 +169,44 @@ function AnnouncementView({ match }) {
               </div>
             </div>
           </Panel>
-          {caregiver?.user && (
-            <Panel panelHeadingTit="간병인 정보">
-              <div className="form-group row">
-                <label className="col-sm-3 control-label">담당 간병인</label>
-                <div className="col-sm-9">
-                  {caregiver.user.userName}({caregiver.user.userId})
+          {caregiver?.user &&
+            (data?.viewAnnouncement?.status === 4 ||
+              data?.viewAnnouncement?.status === 5) && (
+              <Panel panelHeadingTit="간병인 정보">
+                <div className="form-group row">
+                  <label className="col-sm-3 control-label">담당 간병인</label>
+                  <div className="col-sm-9">
+                    {caregiver.user.userName}({caregiver.user.userId})
+                  </div>
                 </div>
-              </div>
-              <div className="form-group row">
-                <label className="col-sm-3 control-label">
-                  담당 간병인 연락처
-                </label>
-                <div className="col-sm-9">{caregiver.user.phone}</div>
-              </div>
-            </Panel>
-          )}
+                <div className="form-group row">
+                  <label className="col-sm-3 control-label">
+                    담당 간병인 연락처
+                  </label>
+                  <div className="col-sm-9">{caregiver.user.phone}</div>
+                </div>
+              </Panel>
+            )}
+          {!caregiver?.user &&
+            (data?.viewAnnouncement?.status === 4 ||
+              data?.viewAnnouncement?.status === 5) && (
+              <Panel panelHeadingTit="간병인 정보">
+                <div className="form-group row">
+                  <label className="col-sm-3 control-label">담당 간병인</label>
+                  <div className="col-sm-9">
+                    탈퇴한 간병인회원이 간병했던 공고입니다.
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 control-label">
+                    담당 간병인 연락처
+                  </label>
+                  <div className="col-sm-9">
+                    탈퇴한 간병인회원이 간병했던 공고입니다.
+                  </div>
+                </div>
+              </Panel>
+            )}
           <Panel panelHeadingTit="보호자 정보">
             <div className="form-group row">
               <label className="col-sm-3 control-label">보호자 성함</label>
@@ -314,6 +364,17 @@ function AnnouncementView({ match }) {
                 목록
               </Button>
             </Col>
+            <Col xs="6" sm="6" className="text-right">
+              <Button
+                onClick={() => {
+                  setShowDeleteAlert(true);
+                }}
+                className="btn btn-white text-danger delete"
+              >
+                <i className="fas fa-trash"></i>
+                삭제
+              </Button>
+            </Col>
           </Row>
           {showAlert && (
             <Alert variant="danger">
@@ -330,6 +391,28 @@ function AnnouncementView({ match }) {
                   onClick={announcementComplete()}
                   variant="outline-success"
                 >
+                  확인
+                </Button>
+                <Button
+                  onClick={() => setShowAlert(false)}
+                  variant="outline-success"
+                >
+                  취소
+                </Button>
+              </div>
+            </Alert>
+          )}
+          {showDeleteAlert && (
+            <Alert variant="danger">
+              <Alert.Heading>해당 공고를 삭제하시겠습니까??</Alert.Heading>
+              <p>
+                공고를 삭제할 경우 공고에 지원한 간병인들의 지원내역들도 함께
+                삭제됩니다. <br />
+                확인 후 삭제를 진행해 주세요.
+              </p>
+              <hr />
+              <div className="d-flex justify-content-end">
+                <Button onClick={onDeleteClick} variant="outline-success">
                   확인
                 </Button>
                 <Button

@@ -22,6 +22,10 @@ function NoticeWrite() {
     refetchQueries: () => [
       {
         query: NOTICE_LIST_QUERY,
+        variables: {
+          skip: 0,
+          take: 10,
+        },
       },
     ],
   });

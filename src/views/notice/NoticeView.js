@@ -31,6 +31,8 @@ function NoticeView({ match }) {
       {
         query: NOTICE_LIST_QUERY,
         variables: {
+          take: 10,
+          skip: 0,
           code,
         },
       },

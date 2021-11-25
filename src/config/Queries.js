@@ -13,8 +13,8 @@ export const LOGIN_MUTATION = gql`
 
 // 유저 관리
 export const USER_LIST_QUERY = gql`
-  query listUser {
-    listUser {
+  query listUser($type: String!, $skip: Int!, $take: Int!) {
+    listUser(type: $type, skip: $skip, take: $take) {
       users {
         code
         userId
@@ -23,6 +23,7 @@ export const USER_LIST_QUERY = gql`
         sex
         phone
       }
+      count
     }
   }
 `;
@@ -65,8 +66,8 @@ export const USER_DELETE_MUTATION = gql`
 
 // 공고 관리
 export const ANNOUNCEMENT_LIST_QUERY = gql`
-  query listAnnouncement($status: Int) {
-    listAnnouncement(status: $status) {
+  query listAnnouncement($status: Int, $skip: Int!, $take: Int!) {
+    listAnnouncement(status: $status, skip: $skip, take: $take) {
       announcements {
         code
         status
@@ -94,6 +95,7 @@ export const ANNOUNCEMENT_LIST_QUERY = gql`
         isolation
         createdAt
       }
+      count
     }
   }
 `;
@@ -167,16 +169,29 @@ export const COMPLETE_ANNOUNCEMENT_MUTATION = gql`
   }
 `;
 
+export const DELETE_ANNOUNCEMENT_MUTATION = gql`
+  mutation deleteAnnouncement($userCode: Int!, $announcementCode: Int!) {
+    deleteAnnouncement(
+      userCode: $userCode
+      announcementCode: $announcementCode
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
 // 공지사항 관리
 export const NOTICE_LIST_QUERY = gql`
-  query listNotice {
-    listNotice {
+  query listNotice($skip: Int!, $take: Int!) {
+    listNotice(skip: $skip, take: $take) {
       notices {
         code
         title
         content
         createdAt
       }
+      count
     }
   }
 `;

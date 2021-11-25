@@ -38,6 +38,11 @@ function PatientView({ match }) {
     refetchQueries: () => [
       {
         query: USER_LIST_QUERY,
+        variables: {
+          type: "환자",
+          skip: 0,
+          take: 10,
+        },
       },
     ],
   });
@@ -176,8 +181,10 @@ function PatientView({ match }) {
                         회원정보를 삭제하시겠습니까?
                       </Alert.Heading>
                       <p>
-                        삭제된 회원정보는 복구가 불가능합니다. 확인 후 삭제를
-                        진행해주세요!
+                        삭제된 회원정보는 복구가 불가능합니다. <br />
+                        환자회원이 작성했던 공고 데이터도 함께 삭제가 됩니다.
+                        <br />
+                        확인 후 삭제를 진행해주세요!
                       </p>
                       <hr />
                       <div className="d-flex justify-content-end">
