@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardBody,
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-} from "reactstrap";
+import { Card, CardBody, Row, Col, FormGroup, Label, Button } from "reactstrap";
 import { useMutation, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";

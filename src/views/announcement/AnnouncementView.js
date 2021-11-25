@@ -8,7 +8,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Panel, BoldTxt, Center, FormControl } from "assets/css/adminStyle";
+import { Panel, BoldTxt, Center } from "assets/css/adminStyle";
 import { MdEast } from "react-icons/md";
 import Alert from "react-bootstrap/Alert";
 import ReactMoment from "react-moment";
@@ -57,7 +57,7 @@ function AnnouncementView({ match }) {
       },
     ],
   });
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     try {
       const {
