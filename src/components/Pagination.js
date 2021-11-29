@@ -15,6 +15,7 @@ const Paginations = styled.div`
         align-items: center;
         li {
           justify-content: center;
+          margin:0 2px;
           .page-link {
             background-color: white;
             display: flex;
@@ -24,12 +25,41 @@ const Paginations = styled.div`
             align-items: center;
             border: solid 1px #eee;
             border-radius: 5px;
+            color: #55b53d;
+            transition: all 0.2s;
+            box-shadow: none;
+            &: hover {
+              color: #42942d;
+              background: #e2e7eb;
+            }
+            }
+            &: focus {
+              color: #42942d;
+            }
+          }
+
+          .page-link[disabled] {
+            color:#979797;
+            background-color: #fff !important;
+            cursor: auto;
+            box-shadow: none;
+            &: hover {
+              color: #979797;
+            }
           }
         }
         li.active {
           .page-link {
             background: black;
             color: white;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            &: hover{
+              color:white;
+              background-color: black;
+            }
           }
         }
       }
@@ -91,7 +121,13 @@ const Pagination = ({
     <Paginations>
       <ul>
         {currentBlock === 1 ? (
-          <></>
+          <>
+            <li className="page-item " key={"paginationPrev"}>
+              <Link className="page-link " title={"이전 페이지 없음"} disabled>
+                <i className="fa fa-angle-left" />
+              </Link>
+            </li>
+          </>
         ) : (
           <>
             <li className="page-item" key={"paginationPrev"}>
@@ -100,7 +136,7 @@ const Pagination = ({
                 title={"이전 " + blockSize + "페이지 보기"}
                 to={baseUrl + "page=" + prevBlockPage}
               >
-                이전
+                <i className="fa fa-angle-left" />
               </Link>
             </li>
           </>
@@ -113,7 +149,13 @@ const Pagination = ({
           totalPage={totalPage}
         />
         {currentBlock === totalBlock ? (
-          <></>
+          <>
+            <li className="page-item " key={"paginationPrev"}>
+              <Link className="page-link " title={"다음 페이지 없음"} disabled>
+                <i className="fa fa-angle-right" />
+              </Link>
+            </li>
+          </>
         ) : (
           <>
             <li className="page-item" key={"paginationNext"}>
@@ -122,7 +164,7 @@ const Pagination = ({
                 title={"다음 " + nextBlockPage + "페이지 보기"}
                 to={baseUrl + "page=" + nextBlockPage}
               >
-                다음
+                <i className="fa fa-angle-right" />
               </Link>
             </li>
           </>

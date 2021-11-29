@@ -25,6 +25,9 @@ import { toast } from "react-toastify";
 function PatientView({ match }) {
   const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
+  const handleRowClick = (noticeCode) => {
+    history.push("/admin/patients");
+  };
   const code = parseInt(match.params.id);
   const { data, loading } = useQuery(USER_DETAIL_QUERY, {
     variables: {
@@ -154,9 +157,11 @@ function PatientView({ match }) {
                       <Col md="12">
                         <FormGroup>
                           <label>회원 가입일</label>
-                          <ReactMoment format="YYYY-MM-DD">
-                            {parseInt(data?.viewProfile?.createdAt)}
-                          </ReactMoment>
+                          <div className="form-control" disabled>
+                            <ReactMoment format="YYYY-MM-DD">
+                              {parseInt(data?.viewProfile?.createdAt)}
+                            </ReactMoment>
+                          </div>
                         </FormGroup>
                       </Col>
                     </Row>
@@ -176,7 +181,7 @@ function PatientView({ match }) {
                   </Form>
 
                   {showAlert && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" className="m-t-20">
                       <Alert.Heading>
                         회원정보를 삭제하시겠습니까?
                       </Alert.Heading>
@@ -191,6 +196,7 @@ function PatientView({ match }) {
                         <Button
                           onClick={onDeleteClick}
                           variant="outline-success"
+                          className="m-r-5 btn-white"
                         >
                           삭제
                         </Button>
@@ -205,6 +211,20 @@ function PatientView({ match }) {
                   )}
                 </CardBody>
               </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs="6" sm="6" className="text-left">
+              <Button
+                onClick={() => {
+                  handleRowClick();
+                }}
+                className="btn-white"
+              >
+                <i className="fa fa-list"></i>
+                목록
+              </Button>
             </Col>
           </Row>
         </div>

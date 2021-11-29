@@ -42,7 +42,7 @@
 .btn.btn-white:focus,
 .btn.btn-white:active,
 .btn.btn-white.active {
-  color: inherit !important;
+  color: #333 !important;
   background: #e2e7eb !important;
   border-color: #d8dde1 !important;
 }
@@ -177,6 +177,9 @@
 .card label {
   font-size: 13px;
   color: #333;
+}
+.card .card-body {
+  padding: 20px 15px;
 }
 .card-user form .form-group {
   margin-bottom: 35px;

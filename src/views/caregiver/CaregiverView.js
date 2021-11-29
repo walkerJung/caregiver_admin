@@ -26,6 +26,9 @@ import { toast } from "react-toastify";
 function CaregiverView({ match }) {
   const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
+  const handleRowClick = (noticeCode) => {
+    history.push("/admin/caregivers");
+  };
   const code = parseInt(match.params.id);
   const { data, loading } = useQuery(USER_DETAIL_QUERY, {
     variables: {
@@ -317,7 +320,7 @@ function CaregiverView({ match }) {
                     </Row>
                   </Form>
                   {showAlert && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" className="m-t-20">
                       <Alert.Heading>
                         회원정보를 삭제하시겠습니까?
                       </Alert.Heading>
@@ -332,6 +335,7 @@ function CaregiverView({ match }) {
                         <Button
                           onClick={onDeleteClick}
                           variant="outline-success"
+                          className="m-r-5 btn-white"
                         >
                           삭제
                         </Button>
@@ -346,6 +350,19 @@ function CaregiverView({ match }) {
                   )}
                 </CardBody>
               </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs="6" sm="6" className="text-left">
+              <Button
+                onClick={() => {
+                  handleRowClick();
+                }}
+                className="btn-white"
+              >
+                <i className="fa fa-list"></i>
+                목록
+              </Button>
             </Col>
           </Row>
         </div>

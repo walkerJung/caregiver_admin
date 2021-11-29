@@ -22,6 +22,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     
   }
+  ul, ul li, ol, ol li {
+    list-style: none;
+  }
   .table-responsive {
     overflow: inherit;
     overflow-x: auto;

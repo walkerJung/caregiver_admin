@@ -377,7 +377,7 @@ function AnnouncementView({ match }) {
             </Col>
           </Row>
           {showAlert && (
-            <Alert variant="danger">
+            <Alert variant="danger" className="m-t-20">
               <Alert.Heading>
                 해당 공고의 상태를 입금완료로 바꾸시겠습니까?
               </Alert.Heading>
@@ -390,6 +390,7 @@ function AnnouncementView({ match }) {
                 <Button
                   onClick={announcementComplete()}
                   variant="outline-success"
+                  className="m-r-5 btn-white"
                 >
                   확인
                 </Button>
@@ -403,7 +404,7 @@ function AnnouncementView({ match }) {
             </Alert>
           )}
           {showDeleteAlert && (
-            <Alert variant="danger">
+            <Alert variant="danger" className="m-t-20">
               <Alert.Heading>해당 공고를 삭제하시겠습니까??</Alert.Heading>
               <p>
                 공고를 삭제할 경우 공고에 지원한 간병인들의 지원내역들도 함께
@@ -412,7 +413,11 @@ function AnnouncementView({ match }) {
               </p>
               <hr />
               <div className="d-flex justify-content-end">
-                <Button onClick={onDeleteClick} variant="outline-success">
+                <Button
+                  onClick={onDeleteClick}
+                  variant="outline-success"
+                  className="m-r-5 btn-white"
+                >
                   확인
                 </Button>
                 <Button

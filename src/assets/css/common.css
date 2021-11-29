@@ -459,7 +459,155 @@
 .pull-none {
   float: none !important;
 }
+.text-inverse {
+  color: #2d353c !important;
+}
+a.text-inverse:hover,
+a.text-inverse:focus {
+  color: #575d63 !important;
+}
+.text-success {
+  color: #55b53d !important;
+}
+a.text-success:hover,
+a.text-success:focus {
+  color: #33bdbd !important;
+}
+.text-info {
+  color: #3984ff !important;
+}
+a.text-info:hover,
+a.text-info:focus {
+  color: #6dc5de !important;
+}
+.text-primary {
+  color: #51cbce !important;
+}
+a.text-primary:hover,
+a.text-primary:focus {
+  color: #5da5e8 !important;
+}
+.text-warning {
+  color: #f59c1a !important;
+}
+a.text-warning:hover,
+a.text-warning:focus {
+  color: #f7b048 !important;
+}
+.text-danger {
+  color: #ff5b57 !important;
+}
+a.text-danger:hover,
+a.text-danger:focus {
+  color: #ff7c79 !important;
+}
+.text-white {
+  color: #fff !important;
+}
+a.text-white:hover,
+a.text-white:focus {
+  color: #f0f3f4 !important;
+}
+.bg-white {
+  background: #ffffff !important;
+}
+.bg-silver-lighter {
+  background: #f4f6f7 !important;
+}
+.bg-silver {
+  background: #f0f3f4 !important;
+}
+.bg-silver-darker {
+  background: #b4b6b7 !important;
+}
 
+.bg-black {
+  background: #2d353c !important;
+}
+
+.bg-black-lighter {
+  background: #575d63 !important;
+}
+
+.bg-grey {
+  background: #b6c2c9 !important;
+}
+.bg-grey-darker {
+  background: #929ba1 !important;
+}
+.bg-grey-lighter {
+  background: #c5ced4 !important;
+}
+
+.bg-red {
+  background: #ff5b57 !important;
+}
+.bg-red-darker {
+  background: #cc4946 !important;
+}
+.bg-red-lighter {
+  background: #ff7c79 !important;
+}
+
+.bg-orange {
+  background: #f59c1a !important;
+}
+.bg-orange-darker {
+  background: #c47d15 !important;
+}
+.bg-orange-lighter {
+  background: #f7b048 !important;
+}
+
+.bg-yellow {
+  background: #e3fa3e !important;
+}
+.bg-yellow-darker {
+  background: #b6c832 !important;
+}
+.bg-yellow-lighter {
+  background: #e9fb65 !important;
+}
+
+.bg-green {
+  background: #4849ff !important;
+}
+.bg-green-darker {
+  background: #4849ff !important;
+}
+.bg-green-lighter {
+  background: #33bdbd !important;
+}
+
+.bg-blue {
+  background: #4849ff !important;
+}
+.bg-blue-darker {
+  background: #3132da !important;
+}
+.bg-blue-lighter {
+  background: #5da5e8 !important;
+}
+
+.bg-aqua {
+  background: #3984ff !important;
+}
+.bg-aqua-darker {
+  background: #3a92ab !important;
+}
+.bg-aqua-lighter {
+  background: #6dc5de !important;
+}
+
+.bg-purple {
+  background: #727cb6 !important;
+}
+.bg-purple-darker {
+  background: #5b6392 !important;
+}
+.bg-purple-lighter {
+  background: #8e96c5 !important;
+}
 .f-w-100 {
   font-weight: 100 !important;
 }
