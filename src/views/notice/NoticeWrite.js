@@ -61,9 +61,10 @@ function NoticeWrite() {
                   제목
                 </Label>
                 <Col sm={10}>
-                  <Input
+                  <input
                     id="title"
                     name="title"
+                    className="form-control"
                     placeholder="제목을 입력해주세요."
                     type="text"
                     ref={register({
@@ -77,12 +78,12 @@ function NoticeWrite() {
                   내용
                 </Label>
                 <Col sm={10}>
-                  <Input
+                  <textarea
                     style={{ maxHeight: 200, height: 200 }}
                     id="content"
                     name="content"
+                    className="form-control"
                     placeholder="내용을 입력해주세요."
-                    type="textarea"
                     ref={register({
                       required: "내용을 입력해주세요.",
                     })}
