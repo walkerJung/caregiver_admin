@@ -56,6 +56,7 @@ const Paginations = styled.div`
             -moz-user-select:none;
             -ms-user-select:none;
             user-select:none;
+            border:0;
             &: hover{
               color:white;
               background-color: black;
