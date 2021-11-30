@@ -70,6 +70,7 @@ function NoticeEdit({ match }) {
                     <input
                       id="title"
                       name="title"
+                      className="form-control"
                       placeholder="제목을 입력해주세요."
                       defaultValue={data?.viewNotice?.title}
                       type="text"
@@ -82,12 +83,13 @@ function NoticeEdit({ match }) {
                     내용
                   </Label>
                   <Col sm={10}>
-                    <input
+                    <textarea
+                      style={{ maxHeight: 200, height: 200 }}
                       id="content"
                       name="content"
+                      className="form-control"
                       placeholder="내용을 입력해주세요."
                       defaultValue={data?.viewNotice?.content}
-                      type="text"
                       ref={register({
                         required: "내용을 입력해주세요.",
                       })}
