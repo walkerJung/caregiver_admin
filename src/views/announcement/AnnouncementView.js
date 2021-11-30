@@ -405,7 +405,7 @@ function AnnouncementView({ match }) {
           )}
           {showDeleteAlert && (
             <Alert variant="danger" className="m-t-20">
-              <Alert.Heading>해당 공고를 삭제하시겠습니까??</Alert.Heading>
+              <Alert.Heading>해당 공고를 삭제하시겠습니까?</Alert.Heading>
               <p>
                 공고를 삭제할 경우 공고에 지원한 간병인들의 지원내역들도 함께
                 삭제됩니다. <br />
