@@ -170,11 +170,8 @@ export const COMPLETE_ANNOUNCEMENT_MUTATION = gql`
 `;
 
 export const DELETE_ANNOUNCEMENT_MUTATION = gql`
-  mutation deleteAnnouncement($userCode: Int!, $announcementCode: Int!) {
-    deleteAnnouncement(
-      userCode: $userCode
-      announcementCode: $announcementCode
-    ) {
+  mutation deleteAnnouncement($announcementCode: Int!) {
+    deleteAnnouncement(announcementCode: $announcementCode) {
       ok
       error
     }
