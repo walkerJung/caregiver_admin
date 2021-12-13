@@ -23,8 +23,11 @@ import {
   DELETE_ANNOUNCEMENT_MUTATION,
 } from "../../config/Queries";
 import { toast } from "react-toastify";
+import qs from "qs";
+import NumberFormat from "react-number-format";
 
-function AnnouncementView({ match }) {
+function AnnouncementView({ match, location }) {
+  const [expectedCost, setExpectedCost] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isModal, setIsModal] = useState(false);
@@ -34,6 +37,15 @@ function AnnouncementView({ match }) {
     history.push("/admin/announcements");
   };
   const code = parseInt(match.params.id);
+  const queryString = qs.parse(location.search.substr(1));
+  const page = queryString.page ? queryString.page : 1;
+  const blockSize = 5;
+  const take = 10;
+  const skip = take * (page - 1);
+
+  const baseUrl = "?";
+
+  const [status, setStatus] = useState(0);
   const { data, loading } = useQuery(ANNOUNCEMENT_DETAIL_QUERY, {
     variables: {
       code,
@@ -58,14 +70,14 @@ function AnnouncementView({ match }) {
     ],
   });
   const { register, handleSubmit } = useForm();
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     try {
       const {
         data: { result },
       } = await expectedCostWriteMutation({
         variables: {
           code,
-          expectedCost: parseInt(data.expectedCost),
+          expectedCost: parseInt(expectedCost),
         },
       });
 
@@ -101,14 +113,15 @@ function AnnouncementView({ match }) {
   };
   const [deleteAnnouncement] = useMutation(DELETE_ANNOUNCEMENT_MUTATION, {
     variables: {
-      userCode: 1,
       announcementCode: code,
     },
     refetchQueries: () => [
       {
         query: ANNOUNCEMENT_LIST_QUERY,
         variables: {
-          status: 0,
+          status: status ? status : 0,
+          skip,
+          take,
         },
       },
     ],
@@ -136,15 +149,9 @@ function AnnouncementView({ match }) {
               <label className="col-sm-3 control-label">간병 기간</label>
               <div className="col-sm-9">
                 <p>
-                  시작일:{" "}
-                  <ReactMoment format="YYYY-MM-DD HH:MM">
-                    {parseInt(data?.viewAnnouncement?.startDate)}
-                  </ReactMoment>{" "}
-                  <MdEast /> 종료일:{" "}
-                  <ReactMoment format="YYYY-MM-DD HH:MM">
-                    {parseInt(data?.viewAnnouncement?.endDate)}
-                  </ReactMoment>{" "}
-                  <BoldTxt>(2박3일)</BoldTxt>
+                  시작일: {data?.viewAnnouncement?.startDate}
+                  <MdEast /> 종료일: {data?.viewAnnouncement?.endDate}
+                  {/* <BoldTxt>(2박3일)</BoldTxt> */}
                 </p>
               </div>
             </div>
@@ -154,18 +161,34 @@ function AnnouncementView({ match }) {
                 관리자 예상간병비
               </label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.expectedCost
-                  ? data?.viewAnnouncement?.expectedCost
-                  : "미입력"}
+                {data?.viewAnnouncement?.expectedCost ? (
+                  <NumberFormat
+                    value={data?.viewAnnouncement?.expectedCost}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"원"}
+                    renderText={(formattedValue) => formattedValue}
+                  />
+                ) : (
+                  "미입력"
+                )}
               </div>
             </div>
 
             <div className="form-group row">
               <label className="col-sm-3 control-label">환자 희망간병비</label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.hopeCost
-                  ? data?.viewAnnouncement?.hopeCost
-                  : "미입력"}
+                {data?.viewAnnouncement?.hopeCost ? (
+                  <NumberFormat
+                    value={data?.viewAnnouncement?.hopeCost}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    suffix={"원"}
+                    renderText={(formattedValue) => formattedValue}
+                  />
+                ) : (
+                  "미입력"
+                )}
               </div>
             </div>
           </Panel>
@@ -239,15 +262,13 @@ function AnnouncementView({ match }) {
 
             <div className="form-group row">
               <label className="col-sm-3 control-label">성별</label>
-              <div className="col-sm-9">
-                {data?.viewAnnouncement?.user.sex}세
-              </div>
+              <div className="col-sm-9">{data?.viewAnnouncement?.user.sex}</div>
             </div>
 
             <div className="form-group row">
               <label className="col-sm-3 control-label">나이</label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.patientAge}
+                {data?.viewAnnouncement?.patientAge}세
               </div>
             </div>
 
@@ -345,7 +366,8 @@ function AnnouncementView({ match }) {
             </Center>
           )}
           {data?.viewAnnouncement?.status != 5 &&
-            data?.viewAnnouncement?.status != 4 && (
+            data?.viewAnnouncement?.status != 4 &&
+            data?.viewAnnouncement?.status != 3 && (
               <Center mt="50">
                 <Button size="54" color="danger" onClick={setIsModal}>
                   예상간병비 산출
@@ -433,15 +455,19 @@ function AnnouncementView({ match }) {
             <form onSubmit={handleSubmit(onSubmit)}>
               <ModalHeader toggle={toggle}>예상간병비 산출</ModalHeader>
               <ModalBody>
-                <input
+                <NumberFormat
                   className="form-control"
-                  type="text"
-                  autoFocus
                   name="expectedCost"
                   placeholder="예상간병비 산출"
                   ref={register({
                     required: "예상간병비를 입력해주세요.",
                   })}
+                  thousandSeparator={true}
+                  suffix={"원"}
+                  onValueChange={(values) => {
+                    const { formattedValue, value } = values;
+                    setExpectedCost(value);
+                  }}
                 />
               </ModalBody>
               <ModalFooter>

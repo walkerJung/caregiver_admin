@@ -25,6 +25,7 @@ function PatientList({ location }) {
 
   const { data, loading } = useQuery(USER_LIST_QUERY, {
     variables: { type: "환자", skip, take },
+    pollInterval: 5000,
   });
   const history = useHistory();
   const handleRowClick = (userCode) => {

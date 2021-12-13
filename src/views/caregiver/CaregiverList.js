@@ -24,6 +24,7 @@ function CaregiverList({ location }) {
   const baseUrl = "?";
   const { data, loading } = useQuery(USER_LIST_QUERY, {
     variables: { type: "간병인", skip, take },
+    pollInterval: 5000,
   });
   const history = useHistory();
   const handleRowClick = (userCode) => {

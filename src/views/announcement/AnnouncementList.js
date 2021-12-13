@@ -38,6 +38,7 @@ function AnnouncementList({ location }) {
       skip,
       take,
     },
+    pollInterval: 5000,
   });
   const history = useHistory();
   const handleRowClick = (announcementCode) => {
@@ -56,7 +57,6 @@ function AnnouncementList({ location }) {
                   <CardTitle tag="h4">간병인 공고 리스트</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  {/*  */}
                   <Row className="m-b-15">
                     <Col xs="12" sm="8">
                       <InputGroup className="input-group">
@@ -121,10 +121,8 @@ function AnnouncementList({ location }) {
                     </thead>
                     <tbody>
                       {!loading &&
-                        data?.listAnnouncement?.announcements
-                          ?.slice(0)
-                          .reverse()
-                          .map((item, index) => {
+                        data?.listAnnouncement?.announcements?.map(
+                          (item, index) => {
                             return (
                               <tr
                                 key={index}
@@ -153,7 +151,8 @@ function AnnouncementList({ location }) {
                                 </td>
                               </tr>
                             );
-                          })}
+                          }
+                        )}
                     </tbody>
                   </Table>
                 </CardBody>
