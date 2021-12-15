@@ -38,7 +38,7 @@ function AnnouncementList({ location }) {
       skip,
       take,
     },
-    pollInterval: 5000,
+    pollInterval: 500,
   });
   const history = useHistory();
   const handleRowClick = (announcementCode) => {

@@ -50,6 +50,7 @@ function AnnouncementView({ match, location }) {
     variables: {
       code,
     },
+    pollInterval: 10000,
   });
   const [expectedCostWriteMutation] = useMutation(EXPECTEDCOST_WRITE_QUERY, {
     refetchQueries: () => [
@@ -110,6 +111,11 @@ function AnnouncementView({ match, location }) {
   });
   const announcementComplete = () => {
     completeAnnouncement();
+    setShowAlert(false);
+    toast.success("입금 완료가 완료되었습니다.", {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
   const [deleteAnnouncement] = useMutation(DELETE_ANNOUNCEMENT_MUTATION, {
     variables: {
@@ -191,6 +197,20 @@ function AnnouncementView({ match, location }) {
                 )}
               </div>
             </div>
+
+            <div className="form-group row">
+              <label className="col-sm-3 control-label">총 입금금액</label>
+              <div className="col-sm-9">
+                {console.log(data.viewAnnouncement)}
+                <NumberFormat
+                  value={data?.viewAnnouncement?.confirmCost}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  suffix={"원"}
+                  renderText={(formattedValue) => formattedValue}
+                />
+              </div>
+            </div>
           </Panel>
           {caregiver?.user &&
             (data?.viewAnnouncement?.status === 4 ||
@@ -207,6 +227,20 @@ function AnnouncementView({ match, location }) {
                     담당 간병인 연락처
                   </label>
                   <div className="col-sm-9">{caregiver.user.phone}</div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 control-label">
+                    담당 간병인 간병비
+                  </label>
+                  <div className="col-sm-9">
+                    <NumberFormat
+                      value={caregiver.caregiverCost}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      suffix={"원"}
+                      renderText={(formattedValue) => formattedValue}
+                    />
+                  </div>
                 </div>
               </Panel>
             )}
@@ -410,7 +444,7 @@ function AnnouncementView({ match, location }) {
               <hr />
               <div className="d-flex justify-content-end">
                 <Button
-                  onClick={announcementComplete()}
+                  onClick={announcementComplete}
                   variant="outline-success"
                   className="m-r-5 btn-white"
                 >

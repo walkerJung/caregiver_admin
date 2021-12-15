@@ -119,6 +119,7 @@ export const ANNOUNCEMENT_DETAIL_QUERY = gql`
       endDate
       expectedCost
       hopeCost
+      confirmCost
       protectorName
       protectorPhone
       patientName
