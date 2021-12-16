@@ -141,6 +141,11 @@ function AnnouncementView({ match, location }) {
     history.push(`/admin/announcements`);
   };
 
+  const nightsAndDays =
+    (new Date(data?.viewAnnouncement?.endDate).getTime() -
+      new Date(data?.viewAnnouncement?.startDate).getTime()) /
+    (1000 * 60 * 60 * 24);
+
   return (
     <>
       {!loading && (
@@ -157,7 +162,9 @@ function AnnouncementView({ match, location }) {
                 <p>
                   시작일: {data?.viewAnnouncement?.startDate}
                   <MdEast /> 종료일: {data?.viewAnnouncement?.endDate}
-                  {/* <BoldTxt>(2박3일)</BoldTxt> */}
+                  <BoldTxt>
+                    ({nightsAndDays - 1}박 {nightsAndDays}일)
+                  </BoldTxt>
                 </p>
               </div>
             </div>
