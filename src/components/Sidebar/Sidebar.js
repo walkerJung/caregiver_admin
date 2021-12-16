@@ -6,7 +6,7 @@ import { Button, Nav } from "reactstrap";
 import PerfectScrollbar from "perfect-scrollbar";
 
 import logo from "../../assets/img/logo.png";
-import { logUserOut } from "apollo";
+import { logUserOut } from "../../apollo";
 
 var ps;
 
