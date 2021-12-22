@@ -290,7 +290,7 @@ function AnnouncementView({ match, location }) {
             <div className="form-group row">
               <label className="col-sm-3 control-label">성함</label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.user.userName}
+                {data?.viewAnnouncement?.patientName}
               </div>
             </div>
 
