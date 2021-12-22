@@ -58,6 +58,7 @@ function CaregiverView({ match }) {
     });
     history.push(`/admin/caregivers`);
   };
+
   return (
     <>
       {!loading && (
@@ -126,10 +127,10 @@ function CaregiverView({ match }) {
                           <label>거주주소</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.address
-                                ? data?.viewProfile?.CaregiverInfo[0]?.address +
+                              data?.viewProfile?.caregiverInfo?.address
+                                ? data?.viewProfile?.caregiverInfo?.address +
                                   " " +
-                                  data?.viewProfile?.CaregiverInfo[0]
+                                  data?.viewProfile?.caregiverInfo
                                     ?.addressDetail
                                 : "미입력 상태"
                             }
@@ -145,9 +146,8 @@ function CaregiverView({ match }) {
                           <label>주민등록번호</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]
-                                ?.residentNumber
-                                ? data?.viewProfile?.CaregiverInfo[0]
+                              data?.viewProfile?.caregiverInfo?.residentNumber
+                                ? data?.viewProfile?.caregiverInfo
                                     ?.residentNumber
                                 : "미입력 상태"
                             }
@@ -163,8 +163,8 @@ function CaregiverView({ match }) {
                           <label>흡연 여부</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.smoke
-                                ? data?.viewProfile?.CaregiverInfo[0]?.smoke
+                              data?.viewProfile?.caregiverInfo?.smoke
+                                ? data?.viewProfile?.caregiverInfo?.smoke
                                 : "미입력 상태"
                             }
                             disabled
@@ -178,8 +178,8 @@ function CaregiverView({ match }) {
                           <label>음주 여부</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.drink
-                                ? data?.viewProfile?.CaregiverInfo[0]?.drink
+                              data?.viewProfile?.caregiverInfo?.drink
+                                ? data?.viewProfile?.caregiverInfo?.drink
                                 : "미입력 상태"
                             }
                             disabled
@@ -195,8 +195,8 @@ function CaregiverView({ match }) {
                           <label>가능한 식사케어</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.mealCare
-                                ? data?.viewProfile?.CaregiverInfo[0]?.mealCare
+                              data?.viewProfile?.caregiverInfo?.mealCare
+                                ? data?.viewProfile?.caregiverInfo?.mealCare
                                 : "미입력 상태"
                             }
                             disabled
@@ -210,8 +210,8 @@ function CaregiverView({ match }) {
                           <label>가능한 대소변케어</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.urineCare
-                                ? data?.viewProfile?.CaregiverInfo[0]?.urineCare
+                              data?.viewProfile?.caregiverInfo?.urineCare
+                                ? data?.viewProfile?.caregiverInfo?.urineCare
                                 : "미입력 상태"
                             }
                             disabled
@@ -227,9 +227,8 @@ function CaregiverView({ match }) {
                           <label>가능한 석션케어</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.suctionCare
-                                ? data?.viewProfile?.CaregiverInfo[0]
-                                    ?.suctionCare
+                              data?.viewProfile?.caregiverInfo?.suctionCare
+                                ? data?.viewProfile?.caregiverInfo?.suctionCare
                                 : "미입력 상태"
                             }
                             disabled
@@ -243,8 +242,8 @@ function CaregiverView({ match }) {
                           <label>가능한 이동케어</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.moveCare
-                                ? data?.viewProfile?.CaregiverInfo[0]?.moveCare
+                              data?.viewProfile?.caregiverInfo?.moveCare
+                                ? data?.viewProfile?.caregiverInfo?.moveCare
                                 : "미입력 상태"
                             }
                             disabled
@@ -261,8 +260,8 @@ function CaregiverView({ match }) {
                           <label>가능한 침대케어</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.bedCare
-                                ? data?.viewProfile?.CaregiverInfo[0]?.bedCare
+                              data?.viewProfile?.caregiverInfo?.bedCare
+                                ? data?.viewProfile?.caregiverInfo?.bedCare
                                 : "미입력 상태"
                             }
                             disabled
@@ -278,8 +277,8 @@ function CaregiverView({ match }) {
                           <label>신분증 사진</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.idCard
-                                ? data?.viewProfile?.CaregiverInfo[0]?.idCard
+                              data?.viewProfile?.caregiverInfo?.idCard
+                                ? data?.viewProfile?.caregiverInfo?.idCard
                                 : "미입력 상태"
                             }
                             type="text"
@@ -294,8 +293,8 @@ function CaregiverView({ match }) {
                           <label>통장사본 사진</label>
                           <Input
                             defaultValue={
-                              data?.viewProfile?.CaregiverInfo[0]?.bankInfo
-                                ? data?.viewProfile?.CaregiverInfo[0]?.bankInfo
+                              data?.viewProfile?.caregiverInfo?.bankInfo
+                                ? data?.viewProfile?.caregiverInfo?.bankInfo
                                 : "미입력 상태"
                             }
                             type="text"

@@ -37,7 +37,7 @@ export const USER_DETAIL_QUERY = gql`
       sex
       phone
       createdAt
-      CaregiverInfo {
+      caregiverInfo {
         userCode
         address
         addressDetail
