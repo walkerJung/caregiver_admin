@@ -155,7 +155,9 @@ function CaregiverView({ match }) {
                         <Input
                           defaultValue={
                             caregiverInfo?.residentNumber
-                              ? caregiverInfo?.residentNumber
+                              ? caregiverInfo?.residentNumber.substr(0, 6) +
+                                "-" +
+                                caregiverInfo?.residentNumber.substr(6, 7)
                               : "미입력 상태"
                           }
                           type="text"
