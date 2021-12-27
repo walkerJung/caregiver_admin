@@ -287,7 +287,7 @@ function CaregiverView({ match }) {
                             className="img-box"
                             style={{
                               backgroundImage: `url(${
-                                "http://3.36.22.165:4000" +
+                                "http://api.care-korea.kr" +
                                 caregiverInfo?.idCard
                               })`,
                             }}
@@ -307,7 +307,7 @@ function CaregiverView({ match }) {
                             className="img-box"
                             style={{
                               backgroundImage: `url(${
-                                "http://3.36.22.165:4000" +
+                                "http://api.care-korea.kr" +
                                 caregiverInfo?.bankInfo
                               })`,
                             }}
