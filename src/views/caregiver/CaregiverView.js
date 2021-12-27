@@ -282,7 +282,11 @@ function CaregiverView({ match }) {
                     <Col md="6">
                       <FormGroup>
                         <label>신분증 사진</label>
-                        {caregiverInfo?.idCard ? (
+                        {caregiverInfo?.idCard === "idCard" ? (
+                          <div className="none-img-box">
+                            <span>등록된 데이터가 없습니다.</span>
+                          </div>
+                        ) : (
                           <div
                             className="img-box"
                             style={{
@@ -292,17 +296,17 @@ function CaregiverView({ match }) {
                               })`,
                             }}
                           ></div>
-                        ) : (
-                          <div className="none-img-box">
-                            <span>등록된 데이터가 없습니다.</span>
-                          </div>
                         )}
                       </FormGroup>
                     </Col>
                     <Col md="6">
                       <FormGroup>
                         <label>통장사본 사진</label>
-                        {caregiverInfo?.bankInfo ? (
+                        {caregiverInfo?.bankInfo === "bankInfo" ? (
+                          <div className="none-img-box">
+                            <span>등록된 데이터가 없습니다.</span>
+                          </div>
+                        ) : (
                           <div
                             className="img-box"
                             style={{
@@ -312,10 +316,6 @@ function CaregiverView({ match }) {
                               })`,
                             }}
                           ></div>
-                        ) : (
-                          <div className="none-img-box">
-                            <span>등록된 데이터가 없습니다.</span>
-                          </div>
                         )}
                       </FormGroup>
                     </Col>
