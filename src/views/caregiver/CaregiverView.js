@@ -108,7 +108,13 @@ function CaregiverView({ match }) {
                     </div>
                     <div className="list flex">
                       <div className="tit">회원 연락처</div>
-                      <div className="txt">{phone}</div>
+                      <div className="txt">
+                        {phone.substr(0, 3) +
+                          "-" +
+                          phone.substr(3, 4) +
+                          "-" +
+                          phone.substr(7, 4)}
+                      </div>
                     </div>
                     <div className="list flex">
                       <div className="tit">회원 가입일</div>

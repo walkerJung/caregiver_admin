@@ -146,7 +146,13 @@ function PatientView({ match }) {
                         <FormGroup>
                           <label>회원 연락처</label>
                           <Input
-                            defaultValue={data?.viewProfile?.phone}
+                            defaultValue={
+                              data?.viewProfile?.phone.substr(0, 3) +
+                              "-" +
+                              data?.viewProfile?.phone.substr(3, 4) +
+                              "-" +
+                              data?.viewProfile?.phone.substr(7, 4)
+                            }
                             type="text"
                             disabled
                           />

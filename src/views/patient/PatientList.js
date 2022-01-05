@@ -65,7 +65,13 @@ function PatientList({ location }) {
                               >
                                 <td>{item.userId}</td>
                                 <td>{item.userName}</td>
-                                <td>{item.phone}</td>
+                                <td>
+                                  {item.phone.substr(0, 3) +
+                                    "-" +
+                                    item.phone.substr(3, 4) +
+                                    "-" +
+                                    item.phone.substr(7, 4)}
+                                </td>
                                 <td>{item.sex}</td>
                               </tr>
                             );
