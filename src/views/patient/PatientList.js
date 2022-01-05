@@ -15,6 +15,7 @@ import Pagination from "../../components/Pagination";
 import qs from "qs";
 
 function PatientList({ location }) {
+  const [keyword, setKeyword] = useState("");
   const queryString = qs.parse(location.search.substr(1));
   const page = queryString.page ? queryString.page : 1;
   const blockSize = 5;
@@ -42,6 +43,15 @@ function PatientList({ location }) {
                 <CardHeader>
                   <CardTitle tag="h4">환자 회원 리스트</CardTitle>
                 </CardHeader>
+                <div>
+                  <input
+                    type="texy"
+                    placeholder="Search"
+                    onChange={(e) => {
+                      setKeyword(e.target.value);
+                    }}
+                  />
+                </div>
                 <CardBody>
                   <Table responsive hover>
                     <thead className="text-primary">
@@ -53,29 +63,52 @@ function PatientList({ location }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {!loading &&
-                        data?.listUser?.users
-                          ?.slice(0)
-                          .reverse()
-                          .map((item, index) => {
-                            return (
-                              <tr
-                                key={index}
-                                onClick={() => handleRowClick(item.code)}
-                              >
-                                <td>{item.userId}</td>
-                                <td>{item.userName}</td>
-                                <td>
-                                  {item.phone.substr(0, 3) +
-                                    "-" +
-                                    item.phone.substr(3, 4) +
-                                    "-" +
-                                    item.phone.substr(7, 4)}
-                                </td>
-                                <td>{item.sex}</td>
-                              </tr>
-                            );
-                          })}
+                      {!loading && keyword == ""
+                        ? data?.listUser?.users
+                            ?.slice(0)
+                            .reverse()
+                            .map((item, index) => {
+                              return (
+                                <tr
+                                  key={index}
+                                  onClick={() => handleRowClick(item.code)}
+                                >
+                                  <td>{item.userId}</td>
+                                  <td>{item.userName}</td>
+                                  <td>
+                                    {item.phone.substr(0, 3) +
+                                      "-" +
+                                      item.phone.substr(3, 4) +
+                                      "-" +
+                                      item.phone.substr(7, 4)}
+                                  </td>
+                                  <td>{item.sex}</td>
+                                </tr>
+                              );
+                            })
+                        : data?.listUser?.users
+                            ?.filter((user) => user.userName.includes(keyword))
+                            .map((filteredUser, index) => {
+                              return (
+                                <tr
+                                  key={index}
+                                  onClick={() =>
+                                    handleRowClick(filteredUser.code)
+                                  }
+                                >
+                                  <td>{filteredUser.userId}</td>
+                                  <td>{filteredUser.userName}</td>
+                                  <td>
+                                    {filteredUser.phone.substr(0, 3) +
+                                      "-" +
+                                      filteredUser.phone.substr(3, 4) +
+                                      "-" +
+                                      filteredUser.phone.substr(7, 4)}
+                                  </td>
+                                  <td>{filteredUser.sex}</td>
+                                </tr>
+                              );
+                            })}
                     </tbody>
                   </Table>
                 </CardBody>
