@@ -68,52 +68,27 @@ function CaregiverList({ location }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {!loading && keyword == ""
-                        ? data?.listUser?.users
-                            ?.slice(0)
-                            .reverse()
-                            .map((item, index) => {
-                              return (
-                                <tr
-                                  key={index}
-                                  onClick={() => handleRowClick(item.code)}
-                                >
-                                  <td>{item.userId}</td>
-                                  <td>{item.userName}</td>
-                                  <td>
-                                    {item.phone.substr(0, 3) +
-                                      "-" +
-                                      item.phone.substr(3, 4) +
-                                      "-" +
-                                      item.phone.substr(7, 4)}
-                                  </td>
-                                  <td>{item.sex}</td>
-                                </tr>
-                              );
-                            })
-                        : data?.listUser?.users
-                            ?.filter((user) => user.userName.includes(keyword))
-                            .map((filteredUser, index) => {
-                              return (
-                                <tr
-                                  key={index}
-                                  onClick={() =>
-                                    handleRowClick(filteredUser.code)
-                                  }
-                                >
-                                  <td>{filteredUser.userId}</td>
-                                  <td>{filteredUser.userName}</td>
-                                  <td>
-                                    {filteredUser.phone.substr(0, 3) +
-                                      "-" +
-                                      filteredUser.phone.substr(3, 4) +
-                                      "-" +
-                                      filteredUser.phone.substr(7, 4)}
-                                  </td>
-                                  <td>{filteredUser.sex}</td>
-                                </tr>
-                              );
-                            })}
+                      {data?.listUser?.users
+                        ?.filter((user) => user.userName.includes(keyword))
+                        .map((filteredUser, index) => {
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() => handleRowClick(filteredUser.code)}
+                            >
+                              <td>{filteredUser.userId}</td>
+                              <td>{filteredUser.userName}</td>
+                              <td>
+                                {filteredUser.phone.substr(0, 3) +
+                                  "-" +
+                                  filteredUser.phone.substr(3, 4) +
+                                  "-" +
+                                  filteredUser.phone.substr(7, 4)}
+                              </td>
+                              <td>{filteredUser.sex}</td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </Table>
                 </CardBody>
