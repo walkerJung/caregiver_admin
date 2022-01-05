@@ -64,6 +64,12 @@ function NoticeList({ location }) {
                     </Col>
                   </Row>
                   <Table responsive hover>
+                    <colgroup>
+                      <col width="10%" />
+                      <col width="*" />
+                      <col width="15%" />
+                      <col width="15%" />
+                    </colgroup>
                     <thead className="text-primary">
                       <tr>
                         {/* <th></th> */}

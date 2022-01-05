@@ -43,17 +43,25 @@ function PatientList({ location }) {
                 <CardHeader>
                   <CardTitle tag="h4">환자 회원 리스트</CardTitle>
                 </CardHeader>
-                <div>
-                  <input
-                    type="texy"
-                    placeholder="Search"
-                    onChange={(e) => {
-                      setKeyword(e.target.value);
-                    }}
-                  />
-                </div>
+
                 <CardBody>
+                  <div className="m-b-10">
+                    <input
+                      type="text"
+                      placeholder="회원 검색 (회원 이름을 입력해주세요.)"
+                      onChange={(e) => {
+                        setKeyword(e.target.value);
+                      }}
+                      className="form-control"
+                    />
+                  </div>
                   <Table responsive hover>
+                    <colgroup>
+                      <col width="25%" />
+                      <col width="25%" />
+                      <col width="25%" />
+                      <col width="25%" />
+                    </colgroup>
                     <thead className="text-primary">
                       <tr>
                         <th>회원 아이디</th>
