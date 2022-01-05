@@ -282,7 +282,11 @@ function AnnouncementView({ match, location }) {
             <div className="form-group row">
               <label className="col-sm-3 control-label">연락처</label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.protectorPhone}
+                {data?.viewAnnouncement?.protectorPhone.substr(0, 3) +
+                  "-" +
+                  data?.viewAnnouncement?.protectorPhone.substr(3, 4) +
+                  "-" +
+                  data?.viewAnnouncement?.protectorPhone.substr(7, 4)}
               </div>
             </div>
           </Panel>
@@ -297,7 +301,11 @@ function AnnouncementView({ match, location }) {
             <div className="form-group row">
               <label className="col-sm-3 control-label">연락처</label>
               <div className="col-sm-9">
-                {data?.viewAnnouncement?.user.phone}
+                {data?.viewAnnouncement?.user.phone.substr(0, 3) +
+                  "-" +
+                  data?.viewAnnouncement?.user.phone.substr(3, 4) +
+                  "-" +
+                  data?.viewAnnouncement?.user.phone.substr(7, 4)}
               </div>
             </div>
 

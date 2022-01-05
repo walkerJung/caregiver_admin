@@ -24,7 +24,7 @@ function CaregiverList({ location }) {
 
   const baseUrl = "?";
   const { data, loading } = useQuery(USER_LIST_QUERY, {
-    variables: { type: "간병인", skip, take },
+    variables: { type: "간병인" },
     pollInterval: 5000,
   });
   const history = useHistory();
@@ -95,13 +95,13 @@ function CaregiverList({ location }) {
               </Card>
             </Col>
           </Row>
-          <Pagination
+          {/* <Pagination
             totalRecord={data.listUser.count}
             blockSize={blockSize}
             pageSize={take}
             currentPage={page}
             baseUrl={baseUrl}
-          />
+          /> */}
         </div>
       )}
     </>

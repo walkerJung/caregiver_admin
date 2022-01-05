@@ -13,7 +13,7 @@ export const LOGIN_MUTATION = gql`
 
 // 유저 관리
 export const USER_LIST_QUERY = gql`
-  query listUser($type: String!, $skip: Int!, $take: Int!) {
+  query listUser($type: String!, $skip: Int, $take: Int) {
     listUser(type: $type, skip: $skip, take: $take) {
       users {
         code
