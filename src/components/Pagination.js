@@ -124,7 +124,12 @@ const Pagination = ({
         {currentBlock === 1 ? (
           <>
             <li className="page-item " key={"paginationPrev"}>
-              <Link className="page-link " title={"이전 페이지 없음"} disabled>
+              <Link
+                to={"#"}
+                className="page-link "
+                title={"이전 페이지 없음"}
+                disabled
+              >
                 <i className="fa fa-angle-left" />
               </Link>
             </li>
@@ -152,7 +157,12 @@ const Pagination = ({
         {currentBlock === totalBlock ? (
           <>
             <li className="page-item " key={"paginationPrev"}>
-              <Link className="page-link " title={"다음 페이지 없음"} disabled>
+              <Link
+                to={"#"}
+                className="page-link "
+                title={"다음 페이지 없음"}
+                disabled
+              >
                 <i className="fa fa-angle-right" />
               </Link>
             </li>

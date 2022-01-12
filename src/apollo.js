@@ -17,7 +17,6 @@ export const logUserIn = (token) => {
 export const logUserOut = () => {
   localStorage.removeItem("token");
   isLoggedInVar(false);
-  console.log("wqerqwer");
 };
 
 const httpLink = createHttpLink({

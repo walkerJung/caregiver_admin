@@ -70,7 +70,7 @@ function AnnouncementView({ match, location }) {
       },
     ],
   });
-  const { register, handleSubmit } = useForm();
+
   const onSubmit = async () => {
     try {
       const {
@@ -208,7 +208,6 @@ function AnnouncementView({ match, location }) {
             <div className="form-group row">
               <label className="col-sm-3 control-label">총 입금금액</label>
               <div className="col-sm-9">
-                {console.log(data.viewAnnouncement)}
                 <NumberFormat
                   value={data?.viewAnnouncement?.confirmCost}
                   displayType={"text"}
@@ -501,16 +500,13 @@ function AnnouncementView({ match, location }) {
             </Alert>
           )}
           <Modal toggle={toggle} isOpen={isModal}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
               <ModalHeader toggle={toggle}>예상간병비 산출</ModalHeader>
               <ModalBody>
                 <NumberFormat
                   className="form-control"
                   name="expectedCost"
                   placeholder="예상간병비 산출"
-                  ref={register({
-                    required: "예상간병비를 입력해주세요.",
-                  })}
                   thousandSeparator={true}
                   suffix={"원"}
                   onValueChange={(values) => {
