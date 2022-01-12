@@ -504,21 +504,20 @@ function AnnouncementView({ match, location }) {
             <form onSubmit={handleSubmit(onSubmit)}>
               <ModalHeader toggle={toggle}>예상간병비 산출</ModalHeader>
               <ModalBody>
-                {/* <NumberFormat
+                <NumberFormat
                   className="form-control"
                   name="expectedCost"
                   placeholder="예상간병비 산출"
                   ref={register({
                     required: "예상간병비를 입력해주세요.",
                   })}
-                  defaultValue={0}
                   thousandSeparator={true}
                   suffix={"원"}
                   onValueChange={(values) => {
                     const { formattedValue, value } = values;
                     setExpectedCost(value);
                   }}
-                /> */}
+                />
               </ModalBody>
               <ModalFooter>
                 <Button
