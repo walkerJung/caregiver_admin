@@ -60,7 +60,7 @@ function AnnouncementList({ location }) {
                   <Row className="m-b-15">
                     <Col xs="12" sm="8">
                       <InputGroup className="input-group">
-                        <Dropdown
+                        {/* <Dropdown
                           className="m-r-5"
                           isOpen={open}
                           toggle={toggle}
@@ -106,7 +106,7 @@ function AnnouncementList({ location }) {
                               입금완료
                             </DropdownItem>
                           </DropdownMenu>
-                        </Dropdown>
+                        </Dropdown> */}
                       </InputGroup>
                     </Col>
                   </Row>
