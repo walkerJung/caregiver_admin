@@ -27,7 +27,7 @@ import qs from "qs";
 import NumberFormat from "react-number-format";
 
 function AnnouncementView({ match, location }) {
-  const [expectedCost, setExpectedCost] = useState(false);
+  const [expectedCost, setExpectedCost] = useState(0);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [isModal, setIsModal] = useState(false);
