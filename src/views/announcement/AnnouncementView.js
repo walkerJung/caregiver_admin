@@ -418,7 +418,7 @@ function AnnouncementView({ match, location }) {
             data?.viewAnnouncement?.status != 4 &&
             data?.viewAnnouncement?.status != 3 && (
               <Center mt="50">
-                <Button size="54" color="danger" onClick={setIsModal}>
+                <Button size="54" color="danger" onClick={toggle}>
                   예상간병비 산출
                 </Button>
               </Center>
