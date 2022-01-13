@@ -116,11 +116,13 @@ function AnnouncementList({ location }) {
                       <col width="*" />
                       <col width="15%" />
                       <col width="15%" />
+                      <col width="15%" />
                     </colgroup>
                     <thead className="text-primary">
                       <tr>
                         <th>연번</th>
                         <th>공고 제목</th>
+                        <th>작성자</th>
                         <th>공고 상태</th>
                         <th>작성일</th>
                       </tr>
@@ -139,6 +141,7 @@ function AnnouncementList({ location }) {
                                     .length - index}
                                 </td>
                                 <td>{item.title}</td>
+                                <td>{item.patientName}</td>
                                 {item.status == 1 && <td>예상간병비 산출중</td>}
                                 {item.status == 2 && (
                                   <td>예상간병비 산출완료</td>
